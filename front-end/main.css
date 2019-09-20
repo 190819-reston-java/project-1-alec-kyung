@@ -16,14 +16,6 @@ h1,
     text-align: center;
 }
 
-.coverphoto>img {
-    display: block;
-    width: 800px;
-    height: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .header {
     padding: 10px;
     font-family: 'Noto Serif TC', serif;
@@ -41,7 +33,7 @@ h1,
 body {
     font-family: 'Noto Serif TC', serif;
     color: rgb(180, 180, 180);
-    background-color: rgb(1, 42, 63);
+    background-color: #012a3f;
 }
 
 h2 {
@@ -59,16 +51,6 @@ h3 {
     font-size: 25px;
 }
 
-img {
-    border-radius: 10px;
-}
-
-.image {
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 ul {
     color: rgb(180, 180, 180);
     font-family: 'Noto Serif TC', serif;
@@ -81,13 +63,6 @@ p {
     font-family: 'Noto Serif TC', serif;
     text-align: center;
     padding: 14px 16px;
-}
-
-blockquote {
-    position: relative;
-    padding: 40px 30px;
-    border-radius: 10px;
-    background-color: rgb(1, 42, 63, 0.4);
 }
 
 
@@ -214,4 +189,20 @@ input[type=submit]:hover {
     border-radius: 5px;
     background-color: #000;
     padding: 10px;
+}
+
+form {
+    /* border: 2px solid white; */
+    width: 600px;
+    text-align: center;
+    padding: 7px;
+    margin: auto;
+    display: table;
+    /* background-color: #2d3438; */
+}
+
+.form-group {
+    width: 400px;
+    margin: auto;
+    padding: 5px;
 }
