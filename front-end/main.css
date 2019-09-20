@@ -6,11 +6,6 @@ html {
     display: block;
 }
 
-.jumbotron {
-    background: #0CB0FF;
-    color: #0CB0FF;
-}
-
 h1,
 .lead {
     text-align: center;
@@ -187,22 +182,38 @@ input[type=submit]:hover {
 
 .container {
     border-radius: 5px;
-    background-color: #000;
     padding: 10px;
 }
 
 form {
-    /* border: 2px solid white; */
-    width: 600px;
+    border: 2px solid #BFC0BF;
+    width: auto;
     text-align: center;
     padding: 7px;
     margin: auto;
-    display: table;
+    box-shadow: white;
+    /*display: table;
     /* background-color: #2d3438; */
 }
 
-.form-group {
+
+/* .form-group {
     width: 400px;
     margin: auto;
     padding: 5px;
+} */
+
+*/ .btn {
+    background-color: #BFC0BF;
+    text-decoration: none;
 }
+
+
+/* 
+.col-md-4 {
+    border: 5px solid white;
+}
+
+.row {
+    border: 5px solid red;
+} */
