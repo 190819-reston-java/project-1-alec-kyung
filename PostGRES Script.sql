@@ -10,6 +10,7 @@ phone_number NULL NUMERIC(10),
 email UNIQUE varchar(50) NOT NULL,
 password NOT NULL varchar(20),
 );
+<<<<<<< HEAD
 
 CREATE TABLE employee_reimbursements(
 
@@ -18,3 +19,5 @@ CREATE TABLE employee_reimbursements(
 
 
 
+=======
+>>>>>>> 265dc9e26baf036a634804aead61da772096a1db
