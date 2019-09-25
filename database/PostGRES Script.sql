@@ -2,18 +2,22 @@ CREATE DATABASE project1;
 
 CREATE SCHEMA projectgenius;
 
-CREATE TABLE employeeinfo (
-employee_id SERIALIZABLE,
-employee_first_name NOT NULL CHARACTER,
-employee_last_name NOT NULL CHARACTER,
-phone_number NULL NUMERIC(10), 
-email UNIQUE varchar(50) NOT NULL,
-password NOT NULL varchar(20),
+
+CREATE TABLE projectgenius.employee_info (
+employee_id SERIAL NOT NULL,
+employee_first_name VARCHAR(20) NOT NULL,
+employee_last_name VARCHAR(20) NOT NULL,
+phone_number NUMERIC(10) NOT NULL, 
+email varchar(50) UNIQUE NOT NULL,
+user_password varchar(20) NOT NULL
 );
-<<<<<<< HEAD
 
-CREATE TABLE employee_reimbursements(
+DROP TABLE projectgenius.employeeinfo;
 
+CREATE TABLE projectgenius.employee_reimbursements(
+reimb_id SERIAL,
+reimb_amount NUMERIC (10, 2) NOT NULL,
+submit_time TIMESTAMP
 );
 
 
