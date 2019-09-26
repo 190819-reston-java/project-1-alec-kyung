@@ -7,7 +7,7 @@ public class Employee {
 	private String employeeLastName;
 	private String email;
 	private String userPassword;
-	private long phoneNumber;
+	private int phoneNumber;
 	
 	
 	public Employee(int employeeId, String employeeFirstName, String employeeLastName, long phoneNumber, String userPassword, String email) {
@@ -46,7 +46,7 @@ public class Employee {
 	public long getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(long phoneNumber) {
+	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	
@@ -57,6 +57,7 @@ public class Employee {
 				+ phoneNumber + "]";
 	}
 	
+
 	
 	
 

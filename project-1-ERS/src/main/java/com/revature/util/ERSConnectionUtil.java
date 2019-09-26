@@ -1,4 +1,4 @@
-package com.revature.repositories;
+package com.revature.util;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,6 +11,13 @@ public class ERSConnectionUtil {
 	private static Connection conn = null;
 	
 	public static Connection getConnection() {
+		
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
 		try {
 			Properties props = new Properties();
 			ClassLoader loader = Thread.currentThread().getContextClassLoader();

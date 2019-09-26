@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.model.Employee;
+import com.revature.util.ERSConnectionUtil;
+import com.revature.util.ERSStreamCloser;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -19,10 +21,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public List<Employee> getEmployees() {
+		
 		PreparedStatement statement = null;
 		ResultSet results = null;
 
-		String query = "SELECT * FROM project1.employee_info";
+		String query = "SELECT * FROM project1.employee_info;";
 
 		List<Employee> employeesList = new ArrayList<Employee>();
 
@@ -36,9 +39,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			System.out.println("Close stream");
 			ERSStreamCloser.close(results);
 			ERSStreamCloser.close(statement);
+			System.out.println("Close stream");
 		}
 
 		return employeesList;

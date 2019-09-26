@@ -1,4 +1,4 @@
-package com.revature.repositories;
+package com.revature.util;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
