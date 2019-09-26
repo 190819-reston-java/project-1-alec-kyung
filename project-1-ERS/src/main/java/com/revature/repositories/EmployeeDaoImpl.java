@@ -42,6 +42,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ERSStreamCloser.close(results);
 			ERSStreamCloser.close(statement);
 			System.out.println("Close stream");
+		
 		}
 
 		return employeesList;

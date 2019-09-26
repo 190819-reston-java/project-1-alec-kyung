@@ -2,7 +2,7 @@ package com.revature.repositories;
 
 import com.revature.model.Employee;
 
-public class ConnectionDriver {
+public class ConnectionTest {
 
 	public static void main(String[] args) {
 		//ERSConnectionUtil.getConnection();
