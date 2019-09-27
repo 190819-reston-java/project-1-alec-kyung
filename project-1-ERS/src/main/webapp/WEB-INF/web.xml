@@ -3,5 +3,17 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+	<display-name>ERS Created Web Application</display-name>
+
+	<servlet>
+
+		<servlet-name>Login</servlet-name>
+		<servlet-class>com.revature.servlet.Login</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/logintest</url-pattern>
+	</servlet-mapping>
+
 </web-app>
