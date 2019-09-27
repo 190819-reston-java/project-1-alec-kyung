@@ -2,73 +2,89 @@ package com.revature.model;
 
 public class Employee {
 	
-	private int employeeId;
+	private int empId;
 	private String email;
-	private String userPwd;
+	private String empPwd;
 	private String firstName;
 	private String lastName;
 	private long phoneNumber;
 	private boolean manager;
 	
-	public Employee(int employeeId, String email, String userPwd, String firstName, String lastName, long phoneNumber,
+	public Employee(int empId, String email, String empPwd, String firstName, String lastName, long phoneNumber,
 			boolean manager) {
 		super();
-		this.employeeId = employeeId;
+		this.empId = empId;
 		this.email = email;
-		this.userPwd = userPwd;
+		this.empPwd = empPwd;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.manager = manager;
 	}
-	public int getEmployeeId() {
-		return employeeId;
+
+	public int getEmpId() {
+		return empId;
 	}
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+
+	public void setEmpId(int empId) {
+		this.empId = empId;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUserPwd() {
-		return userPwd;
+
+	public String getEmpPwd() {
+		return empPwd;
 	}
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
+
+	public void setEmpPwd(String empPwd) {
+		this.empPwd = empPwd;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public int getPhoneNumber() {
+
+	public long getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+
+	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
 	public boolean isManager() {
 		return manager;
 	}
+
 	public void setManager(boolean manager) {
 		this.manager = manager;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", email=" + email + ", userPwd=" + userPwd + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", manager=" + manager + "]";
+		return "Employee [empId=" + empId + ", email=" + email + ", empPwd=" + empPwd + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", manager=" + manager + "]";
 	}
+	
+	
 	
 	
 
