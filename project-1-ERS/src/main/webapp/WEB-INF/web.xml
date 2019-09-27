@@ -3,17 +3,27 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+
 	<display-name>ERS Created Web Application</display-name>
 
 	<servlet>
-
-		<servlet-name>Login</servlet-name>
-		<servlet-class>com.revature.servlet.Login</servlet-class>
+		<servlet-name>Login Servlet</servlet-name>
+		<servlet-class>com.revature.servlet.LoginServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>Login</servlet-name>
+		<servlet-name>Login Servlet</servlet-name>
 		<url-pattern>/logintest</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Manager Servlet</servlet-name>
+		<servlet-class>com.revature.servlets.ManagerServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Manager Servlet</servlet-name>
+		<url-pattern>/manager</url-pattern>
 	</servlet-mapping>
 
 </web-app>

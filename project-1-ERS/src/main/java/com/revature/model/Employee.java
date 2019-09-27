@@ -7,12 +7,22 @@ public class Employee {
 	private String employeeLastName;
 	private String email;
 	private String userPassword;
-	private int phoneNumber;
+	private long phoneNumber;
 	
 	
-	public Employee(int employeeId, String employeeFirstName, String employeeLastName, long phoneNumber, String userPassword, String email) {
-		// TODO Auto-generated constructor stub
+	
+	public Employee(int employeeId, String employeeFirstName, String employeeLastName, long phoneNumber, String email,
+			String userPassword) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeFirstName = employeeFirstName;
+		this.employeeLastName = employeeLastName;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+		this.userPassword = userPassword;
+	
 	}
+
 	public int getEmployeeId() {
 		return employeeId;
 	}
@@ -46,17 +56,17 @@ public class Employee {
 	public long getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumber(long l) {
+		this.phoneNumber = l;
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", employeeFirstName=" + employeeFirstName + ", employeeLastName="
 				+ employeeLastName + ", email=" + email + ", userPassword=" + userPassword + ", phoneNumber="
 				+ phoneNumber + "]";
 	}
+	
 	
 
 	
