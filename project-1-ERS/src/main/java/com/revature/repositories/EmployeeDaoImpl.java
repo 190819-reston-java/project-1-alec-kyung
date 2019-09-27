@@ -14,8 +14,9 @@ import com.revature.util.ERSStreamCloser;
 public class EmployeeDaoImpl implements EmployeeDao {
 
 	private static Employee createEmployeeFromRS(ResultSet results) throws SQLException {
-		return new Employee(results.getInt("employee_id"), results.getString("employee_first_name"),
-				results.getString("employee_last_name"), results.getLong("phone_number"), results.getString("email"), results.getString("user_password")
+		return new Employee(results.getInt("emp_id"), results.getString("email"), results.getString("pwd"), 
+				results.getString("first_name"), results.getString("last_name"),
+				 results.getLong("phone_number"), results.getBoolean("manager")
 				);
 	}
 
@@ -25,7 +26,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		PreparedStatement statement = null;
 		ResultSet results = null;
 
-		String query = "SELECT * FROM project1.employee_info;";
+		String query = "SELECT * FROM ers.employees;";
 
 		List<Employee> employeesList = new ArrayList<Employee>();
 
@@ -72,11 +73,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		PreparedStatement statement = null;
 		ResultSet results = null;
-		String query = "SELECT * FROM project1.employee_info WHERE email=? AND user_password = ?";
-		
-		try (Connection conn = ERSConnectionUtil.getConnection()) {
-			statement = conn.prepareStatement(query);
-			results = statement.executeQuery();
+
+		String query = "SELECT * FROM ers.employees WHERE email=? AND pwd = ?";
 
 			while (results.next()) {
 

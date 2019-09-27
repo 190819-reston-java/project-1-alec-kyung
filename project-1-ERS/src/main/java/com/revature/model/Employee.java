@@ -2,72 +2,92 @@ package com.revature.model;
 
 public class Employee {
 	
-	private int employeeId;
-	private String employeeFirstName;
-	private String employeeLastName;
+	private int empId;
 	private String email;
-	private String userPassword;
+
+	private String empPwd;
+	private String firstName;
+	private String lastName;
 	private long phoneNumber;
+	private boolean manager;
 	
-	
-	
-	public Employee(int employeeId, String employeeFirstName, String employeeLastName, long phoneNumber, String email,
-			String userPassword) {
+	public Employee(int empId, String email, String empPwd, String firstName, String lastName, long phoneNumber,
+			boolean manager) {
 		super();
-		this.employeeId = employeeId;
-		this.employeeFirstName = employeeFirstName;
-		this.employeeLastName = employeeLastName;
-		this.phoneNumber = phoneNumber;
+		this.empId = empId;
 		this.email = email;
-		this.userPassword = userPassword;
-	
+		this.empPwd = empPwd;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.manager = manager;
+
 	}
 
-	public int getEmployeeId() {
-		return employeeId;
+	public int getEmpId() {
+		return empId;
 	}
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+
+	public void setEmpId(int empId) {
+		this.empId = empId;
 	}
-	public String getEmployeeFirstName() {
-		return employeeFirstName;
-	}
-	public void setEmployeeFirstName(String employeeFirstName) {
-		this.employeeFirstName = employeeFirstName;
-	}
-	public String getEmployeeLastName() {
-		return employeeLastName;
-	}
-	public void setEmployeeLastName(String employeeLastName) {
-		this.employeeLastName = employeeLastName;
-	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getUserPassword() {
-		return userPassword;
+
+	public String getEmpPwd() {
+		return empPwd;
 	}
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+
+	public void setEmpPwd(String empPwd) {
+		this.empPwd = empPwd;
 	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public long getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(long l) {
-		this.phoneNumber = l;
+
+
+	public void setPhoneNumber(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public boolean isManager() {
+		return manager;
+	}
+
+	public void setManager(boolean manager) {
+		this.manager = manager;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", employeeFirstName=" + employeeFirstName + ", employeeLastName="
-				+ employeeLastName + ", email=" + email + ", userPassword=" + userPassword + ", phoneNumber="
-				+ phoneNumber + "]";
+		return "Employee [empId=" + empId + ", email=" + email + ", empPwd=" + empPwd + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", manager=" + manager + "]";
 	}
 	
-	
+
 
 	
 	
