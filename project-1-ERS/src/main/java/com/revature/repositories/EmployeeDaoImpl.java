@@ -26,7 +26,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		PreparedStatement statement = null;
 		ResultSet results = null;
 
-		String query = "SELECT * FROM projectone.employees;";
+		String query = "SELECT * FROM ers.employees;";
 
 		List<Employee> employeesList = new ArrayList<Employee>();
 
@@ -61,7 +61,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		PreparedStatement statement = null;
 		ResultSet results = null;
-		String query = "SELECT * FROM projectone.employees WHERE email=? AND pwd = ?";
+		String query = "SELECT * FROM ers.employees WHERE email=? AND pwd = ?";
 
 		return null;
 	}
