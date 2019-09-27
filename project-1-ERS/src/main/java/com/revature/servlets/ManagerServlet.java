@@ -22,11 +22,11 @@ public class ManagerServlet extends HttpServlet {
 		String[] splitURI = req.getRequestURI().split("/");
 		System.out.println("EMP SPLIT URI: " + Arrays.toString(splitURI));
 		
-		String[] tokens = Arrays.copyOfRange(splitURI, 1, splitURI.length);
+		String[] tokens = Arrays.copyOfRange(splitURI, 2, splitURI.length);
 		
 		System.out.println(Arrays.toString(tokens));
 		
-		switch (tokens[1]) {
+		switch (tokens[0]) {
 		case "manager":
 			getEmployees(req, resp, tokens);
 		}
@@ -39,7 +39,7 @@ public class ManagerServlet extends HttpServlet {
 		
 		Employee employee = null;
 		
-		if(req.getMethod() == "GET") {
+		if(req.getMethod().equals("GET")) {
 			System.out.println("GET from JS");
 			if (tokens.length == 1) {
 				String jsonEmployees = om.writeValueAsString(employeeService.getEmployeesList());

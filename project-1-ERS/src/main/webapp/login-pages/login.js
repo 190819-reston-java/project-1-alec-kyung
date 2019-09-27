@@ -1,6 +1,6 @@
 'use strict';
 
-const GET_EMPLOYEES_URL = "/manager"
+const GET_EMPLOYEES_URL = "/project-1-ERS/manager"
 let getEmployees = document.getElementById("get-employees");
 let loginVerify = document.getElementById("test-login");
 
@@ -11,7 +11,7 @@ getEmployees.addEventListener("click", (event) => {
     fetch(GET_EMPLOYEES_URL, { method: "GET" })
         .then((response) => {
             console.log("Response: " + response);
-            console.log(response.json());
+            // console.log(response.json());
             return response.json();
         })
         .then((employeesJson) => {

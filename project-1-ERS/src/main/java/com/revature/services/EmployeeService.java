@@ -12,5 +12,9 @@ public class EmployeeService {
 	public List<Employee> getEmployeesList(){
 		return employeeDao.getEmployees();
 	}
+	
+	public Employee getLoginCredentials(String email, String userPwd) {
+		return employeeDao.getEmployeeLogin(email, userPwd);
+	}
 
 }

@@ -24,6 +24,10 @@ public class Employee {
 
 	}
 
+	public Employee() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getEmpId() {
 		return empId;
 	}

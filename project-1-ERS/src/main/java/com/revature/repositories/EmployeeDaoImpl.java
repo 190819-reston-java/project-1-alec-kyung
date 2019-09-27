@@ -14,15 +14,14 @@ import com.revature.util.ERSStreamCloser;
 public class EmployeeDaoImpl implements EmployeeDao {
 
 	private static Employee createEmployeeFromRS(ResultSet results) throws SQLException {
-		return new Employee(results.getInt("emp_id"), results.getString("email"), results.getString("pwd"), 
-				results.getString("first_name"), results.getString("last_name"),
-				 results.getLong("phone_number"), results.getBoolean("manager")
-				);
+		return new Employee(results.getInt("emp_id"), results.getString("email"), results.getString("pwd"),
+				results.getString("first_name"), results.getString("last_name"), results.getLong("phone_number"),
+				results.getBoolean("manager"));
 	}
 
 	@Override
 	public List<Employee> getEmployees() {
-		
+
 		PreparedStatement statement = null;
 		ResultSet results = null;
 
@@ -35,19 +34,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			results = statement.executeQuery();
 
 			while (results.next()) {
-//				Employee empInfo = new Employee();
-//				
-//				empInfo.setEmployeeId(results.getInt("employee_id"));
-//				empInfo.setEmployeeFirstName(results.getString("employee_first_name"));
-//				empInfo.setEmployeeLastName(results.getString("employee_last_name"));
-//				empInfo.setPhoneNumber(results.getLong("phone_number"));
-//				empInfo.setEmail(results.getString("email"));
-//				empInfo.setUserPassword(results.getString("user_password"));
-//				
-//				employeesList.add(empInfo);
+				Employee empInfo = new Employee();
+				
+				empInfo.setEmpId(results.getInt("emp_id"));
+				empInfo.setEmail(results.getString("email"));
+				empInfo.setEmpPwd(results.getString("pwd"));
+				empInfo.setFirstName(results.getString("first_name"));
+				empInfo.setLastName(results.getString("last_name"));
+				empInfo.setPhoneNumber(results.getLong("phone_number"));
+				empInfo.setManager(results.getBoolean("manager"));
+				
+				employeesList.add(empInfo);
 
-
-				employeesList.add(createEmployeeFromRS(results));
+				//employeesList.add(createEmployeeFromRS(results));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,7 +54,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ERSStreamCloser.close(results);
 			ERSStreamCloser.close(statement);
 			System.out.println("Close stream");
-		
+
 		}
 
 		return employeesList;
@@ -78,11 +77,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 			while (results.next()) {
 
-				//employeesList.add(createEmployeeFromRS(results));
-			}
-		} catch (SQLException e) {
+				//user.add(createEmployeeFromRS(results));
+			} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+			} finally {
 			ERSStreamCloser.close(results);
 			ERSStreamCloser.close(statement);
 			System.out.println("Close stream");
