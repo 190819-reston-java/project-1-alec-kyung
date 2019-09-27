@@ -4,6 +4,7 @@ public class Employee {
 	
 	private int empId;
 	private String email;
+
 	private String empPwd;
 	private String firstName;
 	private String lastName;
@@ -20,6 +21,7 @@ public class Employee {
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.manager = manager;
+
 	}
 
 	public int getEmpId() {
@@ -66,6 +68,7 @@ public class Employee {
 		return phoneNumber;
 	}
 
+
 	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
@@ -84,9 +87,7 @@ public class Employee {
 				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", manager=" + manager + "]";
 	}
 	
-	
-	
-	
+
 
 	
 	

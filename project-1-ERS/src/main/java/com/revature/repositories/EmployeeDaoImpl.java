@@ -35,6 +35,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			results = statement.executeQuery();
 
 			while (results.next()) {
+//				Employee empInfo = new Employee();
+//				
+//				empInfo.setEmployeeId(results.getInt("employee_id"));
+//				empInfo.setEmployeeFirstName(results.getString("employee_first_name"));
+//				empInfo.setEmployeeLastName(results.getString("employee_last_name"));
+//				empInfo.setPhoneNumber(results.getLong("phone_number"));
+//				empInfo.setEmail(results.getString("email"));
+//				empInfo.setUserPassword(results.getString("user_password"));
+//				
+//				employeesList.add(empInfo);
+
+
 				employeesList.add(createEmployeeFromRS(results));
 			}
 		} catch (SQLException e) {
@@ -61,9 +73,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		PreparedStatement statement = null;
 		ResultSet results = null;
+
 		String query = "SELECT * FROM ers.employees WHERE email=? AND pwd = ?";
 
-		return null;
+			while (results.next()) {
+
+				//employeesList.add(createEmployeeFromRS(results));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ERSStreamCloser.close(results);
+			ERSStreamCloser.close(statement);
+			System.out.println("Close stream");
+		
+		}
+		
+		return user;
 	}
 
 	@Override
