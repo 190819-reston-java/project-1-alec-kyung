@@ -4,10 +4,11 @@ import java.util.List;
 
 import com.revature.model.Employee;
 import com.revature.repositories.EmployeeDao;
+import com.revature.repositories.EmployeeDaoImpl;
 
 public class EmployeeService {
 	
-	private EmployeeDao employeeDao;
+	private EmployeeDao employeeDao = new EmployeeDaoImpl();
 	
 	public List<Employee> getEmployeesList(){
 		return employeeDao.getEmployees();

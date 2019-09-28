@@ -10,16 +10,16 @@ getEmployees.addEventListener("click", (event) => {
     console.log("clicked");
     fetch(GET_EMPLOYEES_URL, { method: "GET" })
         .then((response) => {
-            console.log("Response: " + response);
             // console.log(response.json());
             return response.json();
         })
         .then((employeesJson) => {
+            console.log(employeesJson)
             clearDisplay();
             for (let employee in employeesJson) {
-                console.log(employeesJson);
+                console.log("EMPLOYEES JSON: " + employeesJson);
 
-                console.log(employeesJson[employee]);
+                console.log("EMPLOYEE: " + employeesJson[employee]);
 
                 createLi(employeesJson[employee]);
             }
@@ -28,11 +28,13 @@ getEmployees.addEventListener("click", (event) => {
 })
 
 let employeesList = document.getElementById("employeesList");
+
 let clearDisplay = () => {
     employeesList.innerHTML = "";
 }
 
-let createList = (employee) => {
+let createLi = ((employee) => {
     let li = document.createElement("li");
     li.innerText = `${employee.employeeFirstName} ${employee.employeeLastName} : Email ${employee.email}, Phone ${employee.phoneNumber}`;
-}
+
+});

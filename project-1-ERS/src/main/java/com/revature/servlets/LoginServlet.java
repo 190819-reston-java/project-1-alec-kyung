@@ -11,10 +11,7 @@ public class LoginServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Login initialized");
-		
-		EmployeeService employeeService = new EmployeeService();
-		ObjectMapper om = new ObjectMapper();
+	
 	}
 
 }

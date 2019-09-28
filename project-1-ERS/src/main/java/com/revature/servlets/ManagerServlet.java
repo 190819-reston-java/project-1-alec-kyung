@@ -15,7 +15,7 @@ import com.revature.services.EmployeeService;
 
 public class ManagerServlet extends HttpServlet {
 	
-	private EmployeeService employeeService;
+	private EmployeeService employeeService = new EmployeeService();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,6 +43,7 @@ public class ManagerServlet extends HttpServlet {
 			System.out.println("GET from JS");
 			if (tokens.length == 1) {
 				String jsonEmployees = om.writeValueAsString(employeeService.getEmployeesList());
+				System.out.println(jsonEmployees);
 				pw.write(jsonEmployees);
 			}
 		}

@@ -4,7 +4,7 @@ public class Employee {
 	
 	private int empId;
 	private String email;
-
+	
 	private String empPwd;
 	private String firstName;
 	private String lastName;
@@ -25,7 +25,7 @@ public class Employee {
 	}
 
 	public Employee() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public int getEmpId() {

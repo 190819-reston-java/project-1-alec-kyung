@@ -7,22 +7,23 @@
 	<display-name>ERS Created Web Application</display-name>
 
 	<servlet>
-		<servlet-name>Login Servlet</servlet-name>
+		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>com.revature.servlets.LoginServlet</servlet-class>
 	</servlet>
 
+<servlet>
+		<servlet-name>ManagerServlet</servlet-name>
+		<servlet-class>com.revature.servlets.ManagerServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
-		<servlet-name>Login Servlet</servlet-name>
+		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/logintest</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>Manager Servlet</servlet-name>
-		<servlet-class>com.revature.servlets.ManagerServlet</servlet-class>
-	</servlet>
+	
 
 	<servlet-mapping>
-		<servlet-name>Manager Servlet</servlet-name>
+		<servlet-name>ManagerServlet</servlet-name>
 		<url-pattern>/manager</url-pattern>
 	</servlet-mapping>
 
