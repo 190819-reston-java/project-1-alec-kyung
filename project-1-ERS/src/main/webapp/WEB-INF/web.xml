@@ -11,16 +11,16 @@
 		<servlet-class>com.revature.servlets.LoginServlet</servlet-class>
 	</servlet>
 
-<servlet>
+	<servlet>
 		<servlet-name>ManagerServlet</servlet-name>
 		<servlet-class>com.revature.servlets.ManagerServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/logintest</url-pattern>
+		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 
-	
+
 
 	<servlet-mapping>
 		<servlet-name>ManagerServlet</servlet-name>

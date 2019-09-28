@@ -2,7 +2,7 @@
 
 const GET_EMPLOYEES_URL = "/project-1-ERS/manager";
 let getEmployees = document.getElementById("get-employees");
-let loginVerify = document.getElementById("test-login");
+// let loginVerify = document.getElementById("test-login");
 
 //getEmployees.addEventListener("click", console.log("clicked"));
 
