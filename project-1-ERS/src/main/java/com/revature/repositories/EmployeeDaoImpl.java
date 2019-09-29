@@ -68,26 +68,31 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public Employee getEmployeeLogin(String email, String userPassword) {
-//		Employee user = null;
-//
-//		PreparedStatement statement = null;
-//		ResultSet results = null;
-//
-//		String query = "SELECT * FROM ers.employees WHERE email=? AND pwd = ?";
-//
-//			while (results.next()) {
-//
-//				//user.add(createEmployeeFromRS(results));
-//			} catch (SQLException e) {
-//			e.printStackTrace();
-//			} finally {
-//			ERSStreamCloser.close(results);
-//			ERSStreamCloser.close(statement);
-//			System.out.println("Close stream");
-//		
-//		}
-//		
-		return null;
+		Employee user = null;
+
+		PreparedStatement statement = null;
+		ResultSet results = null;
+
+		String query = "SELECT * FROM ers.employees WHERE email=? AND pwd = ?";
+		
+		try (Connection conn = ERSConnectionUtil.getConnection()){
+			statement = conn.prepareStatement(query);
+			statement.setString(1, email);
+			statement.setString(2, userPassword);
+			if (statement.execute()) {
+				results = statement.getResultSet();
+				if (results.next()) {
+					user = createEmployeeFromRS(results);
+					}
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ERSStreamCloser.close(results);
+			ERSStreamCloser.close(statement);
+		}
+		
+		return user;
 	}
 
 	@Override

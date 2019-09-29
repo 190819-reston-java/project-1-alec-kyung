@@ -12,6 +12,8 @@ public class ConnectionTest {
 		for (Employee e : test.getEmployees()) {
 			System.out.println(e);
 		}
+		
+		System.out.println(test.getEmployeeLogin("revature@gmail.com", "revaure"));
 
 	}
 
