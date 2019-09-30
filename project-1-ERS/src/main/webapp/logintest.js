@@ -6,10 +6,13 @@ const LOGIN_URL = "/project-1-ERS/login";
 login.addEventListener("submit", (event) => {
     console.log("Login test");
 
-    fetch(LOGIN_URL, { method: "POST" })
+
+
+    fetch(LOGIN_URL, { method: "GET" })
         .then((response) => {
             return response.json();
         })
+        .catch(console.log);
 
 
 });

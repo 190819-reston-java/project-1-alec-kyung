@@ -15,6 +15,7 @@
 		<servlet-name>ManagerServlet</servlet-name>
 		<servlet-class>com.revature.servlets.ManagerServlet</servlet-class>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/login</url-pattern>

@@ -13,7 +13,7 @@ public class ConnectionTest {
 			System.out.println(e);
 		}
 		
-		System.out.println(test.getEmployeeLogin("revature@gmail.com", "revaure"));
+		System.out.println(test.getEmployeeLogin("revature@gmail.com", "revature"));
 
 	}
 
