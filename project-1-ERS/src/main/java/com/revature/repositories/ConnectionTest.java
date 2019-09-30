@@ -14,6 +14,8 @@ public class ConnectionTest {
 		}
 		
 		System.out.println(test.getEmployeeLogin("revature@gmail.com", "revature"));
+		
+		System.out.println(test.getResolvedReimb());
 
 	}
 

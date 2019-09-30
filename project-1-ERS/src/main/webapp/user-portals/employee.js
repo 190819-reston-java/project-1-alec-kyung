@@ -5,12 +5,12 @@ const EMPLOYEES_URL = "/project-1-ERS/manager";
 
 //Get Employee Info
 let employeeInfoCard = document.getElementById("employeeInformation");
-let employeeInfo = document.getElementById("get-info");
+let getSingleEmployeeInfo = document.getElementById("get-info");
 
-employeeInfo.addEventListener("submit", (event) => {
-    // event.preventDefault();
+getSingleEmployeeInfo.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-    let email = employeeInfo.email.value;
+    let email = getSingleEmployeeInfo.email.value;
     fetch(`${EMPLOYEES_URL}/${email}`)
         .then((response) => {
             return response.json();

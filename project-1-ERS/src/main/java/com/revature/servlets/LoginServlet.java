@@ -30,24 +30,29 @@ public class LoginServlet extends HttpServlet {
 		ObjectMapper om = new ObjectMapper();
 		
 		String email = req.getParameter("userEmail");
-		String password = req.getParameter("userPAssword");
+		String password = req.getParameter("userPassword");
+		
+		System.out.println(email);
+		System.out.println(password);
 		
 		EmployeeService employeeUser = new EmployeeService();
+		//String verifiedEmp = om.writeValueAsString(employeeUser.getLoginCredentials(email, password));
+
 		
 		Employee verifiedEmp = employeeUser.getLoginCredentials(email, password);
 		System.out.println(verifiedEmp);
-		System.out.println(email);
-		System.out.println(password);
+		
 		if (verifiedEmp != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", verifiedEmp);
 			System.out.println("Login successful!");
-			resp.sendRedirect("user-portals/employee_page");
+			resp.sendRedirect("user-portals/employee_page.html");
 		
 		} else {
 			System.out.println("Invalid");
 			String invalidMessage = "Invalid email/password";
 			req.setAttribute("message", invalidMessage);
+			resp.sendRedirect("index.html");
 		}
 
 	}
@@ -77,6 +82,8 @@ public class LoginServlet extends HttpServlet {
 //		PrintWriter pw = resp.getWriter();
 //		String jsRequest = req.getMethod();
 //		
+//		EmployeeService employeeUser = new EmployeeService();
+//
 //		if (jsRequest.equals("POST")) {
 //			loginServletLogger.info("POST from JS");
 //			String email = req.getParameter("userEmail");
@@ -91,7 +98,7 @@ public class LoginServlet extends HttpServlet {
 //		
 //		
 //	}
-//		
+//	
 //}
 		
 //		
