@@ -34,6 +34,7 @@ public class ManagerServlet extends HttpServlet {
 		switch (tokens[0]) {
 		case "manager":
 			getEmployees(req, resp, tokens);
+			
 		}
 		
 	}
@@ -53,6 +54,8 @@ public class ManagerServlet extends HttpServlet {
 				managerServletLogger.info(jsonEmployees);
 				
 				pw.write(jsonEmployees);
+			} else {
+				String jsonEmployee = om.writeValueAsString(employeeService.getEmployeeInfo(tokens[1]));
 			}
 		}
 		

@@ -61,10 +61,34 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public Employee getEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public Employee getEmployeeInfo(String email) {
+		Employee user = null;
+
+		PreparedStatement statement = null;
+		ResultSet results = null;
+
+		String query = "SELECT * FROM ers.employees WHERE email=?";
+		
+		try (Connection conn = ERSConnectionUtil.getConnection()){
+			statement = conn.prepareStatement(query);
+			statement.setString(1, email);
+
+			if (statement.execute()) {
+				results = statement.getResultSet();
+				if (results.next()) {
+					user = createEmployeeFromRS(results);
+					}
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ERSStreamCloser.close(results);
+			ERSStreamCloser.close(statement);
+		}
+		
+		return user;
 	}
+	
 
 	@Override
 	public Employee getEmployeeLogin(String email, String userPassword) {
