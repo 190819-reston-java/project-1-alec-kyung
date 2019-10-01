@@ -8,12 +8,17 @@
 
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>com.revature.servlets.LoginServlet</servlet-class>
+		<servlet-class>com.revature.servlets.Login</servlet-class>
 	</servlet>
 
 	<servlet>
 		<servlet-name>ManagerServlet</servlet-name>
 		<servlet-class>com.revature.servlets.ManagerServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>Welcome</servlet-name>
+		<servlet-class>com.revature.servlets.Welcome</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -26,4 +31,8 @@
 		<url-pattern>/manager</url-pattern>
 	</servlet-mapping>
 
+	<servlet-mapping>
+		<servlet-name>Welcome</servlet-name>
+		<url-pattern>/Welcome</url-pattern>
+	</servlet-mapping>
 </web-app>
