@@ -64,7 +64,7 @@ SELECT *
 FROM ers.employees
 FULL JOIN ers.reimbursements
 ON ers.employees.emp_id = ers.reimbursements.submitted_by_id
-WHERE ers.reimbursements.resolved_by_id IS NULL AND ers.reimbursements.submitted_by_id IS NOT NULL AND ers.reimbursements.submitted_by_id = 2;
+WHERE ers.reimbursements.resolved_by_id IS NULL AND ers.reimbursements.submitted_by_id IS NOT NULL AND ers.reimbursements.submitted_by_id = ?;
 
 --An Employee can view their resolved reimbursement requests
 -- SET THE NUMBER to ? for java
@@ -72,7 +72,7 @@ SELECT *
 FROM ers.employees
 FULL JOIN ers.reimbursements
 ON ers.employees.emp_id = ers.reimbursements.submitted_by_id
-WHERE ers.reimbursements.resolved_by_id IS NOT NULL AND ers.reimbursements.submitted_by_id = 2;
+WHERE ers.reimbursements.resolved_by_id IS NOT NULL AND ers.reimbursements.submitted_by_id = ?;
 
 --An Employee can view their information    (SAME FOR MANAGER)
 -- SET THE NUMBER to ? for java
@@ -82,14 +82,17 @@ WHERE emp_id = 2;
 
 --An Employee can update their information
 -- CANNOT UPDATE IF MANAGER OR NOT
+--?? FOR JAVA
 UPDATE ers.employees
 SET emp_id = ?, email = ?, pwd = ?, first_name = ?, last_name = ?, phone_number = ?;
 
 --A Manager can approve/deny pending reimbursement requests
+--???? FOR JAVA
 UPDATE ers.reimbursements
 SET status =?, resolved_by_id = ?;
 
 --A Manager can view all pending requests from all employees
+--NO SESSION REQUIRED, STATIC SQL SCRIPT
 SELECT * 
 FROM ers.employees
 FULL JOIN ers.reimbursements
@@ -97,6 +100,7 @@ ON ers.employees.emp_id = ers.reimbursements.submitted_by_id
 WHERE ers.reimbursements.resolved_by_id IS NULL AND ers.reimbursements.submitted_by_id IS NOT NULL;
 
 --A Manager can view all resolved requests from all employees and see which manager resolved it
+--NO SESSION REQUIRED
 SELECT emp_id, first_name, last_name
 FROM ers.employees
 FULL JOIN ers.reimbursements
@@ -104,13 +108,15 @@ ON ers.employees.emp_id = ers.reimbursements.resolved_by_id
 WHERE ers.reimbursements.resolved_by_id IS NOT NULL;
 
 --A Manager can view all Employees
+--STATIC SCRIPT, NO SESSION REQUIRED
 SELECT *
 FROM ers.employees;
 
 --A Manager can view reimbursement requests from a single Employee
+--??? FOR JAVA
 SELECT * 
 FROM ers.employees
 FULL JOIN ers.reimbursements
 ON ers.employees.emp_id = ers.reimbursements.submitted_by_id
-WHERE ers.reimbursements.resolved_by_id IS NULL AND ers.reimbursements.submitted_by_id IS NOT NULL AND ers.reimbursements.submitted_by_id = 2;
+WHERE ers.reimbursements.resolved_by_id IS NULL AND ers.reimbursements.submitted_by_id IS NOT NULL AND ers.reimbursements.submitted_by_id = ?;
 
