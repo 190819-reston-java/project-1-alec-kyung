@@ -9,26 +9,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Employee;
 import com.revature.services.EmployeeService;
 
 public class ManagerServlet extends HttpServlet {
 	
+	private static Logger managerServletLogger = Logger.getLogger(ManagerServlet.class);
+	
 	private EmployeeService employeeService = new EmployeeService();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String[] splitURI = req.getRequestURI().split("/");
-		System.out.println("EMP SPLIT URI: " + Arrays.toString(splitURI));
+		
+		managerServletLogger.debug("Employee Split URI: " + Arrays.toString(splitURI));
 		
 		String[] tokens = Arrays.copyOfRange(splitURI, 2, splitURI.length);
 		
-		System.out.println(Arrays.toString(tokens));
+		managerServletLogger.debug(Arrays.toString(tokens));
 		
 		switch (tokens[0]) {
 		case "manager":
 			getEmployees(req, resp, tokens);
+			
 		}
 		
 	}
@@ -40,11 +46,16 @@ public class ManagerServlet extends HttpServlet {
 		Employee employee = null;
 		
 		if(req.getMethod().equals("GET")) {
-			System.out.println("GET from JS");
+			
+			managerServletLogger.info("GET from JS running");
 			if (tokens.length == 1) {
 				String jsonEmployees = om.writeValueAsString(employeeService.getEmployeesList());
-				System.out.println(jsonEmployees);
+				
+				managerServletLogger.info(jsonEmployees);
+				
 				pw.write(jsonEmployees);
+			} else {
+				String jsonEmployee = om.writeValueAsString(employeeService.getEmployeeInfo(tokens[1]));
 			}
 		}
 		

@@ -1,8 +1,9 @@
 'use strict';
 
-const GET_EMPLOYEES_URL = "/project-1-ERS/manager"
+const GET_EMPLOYEES_URL = "/project-1-ERS/manager";
 let getEmployees = document.getElementById("get-employees");
-let loginVerify = document.getElementById("test-login");
+let employeesList = document.getElementById("employeesList");
+// let loginVerify = document.getElementById("test-login");
 
 //getEmployees.addEventListener("click", console.log("clicked"));
 
@@ -14,7 +15,6 @@ getEmployees.addEventListener("click", (event) => {
             return response.json();
         })
         .then((employeesJson) => {
-            console.log(employeesJson)
             clearDisplay();
             for (let employee in employeesJson) {
                 console.log("EMPLOYEES JSON: " + employeesJson);
@@ -25,16 +25,16 @@ getEmployees.addEventListener("click", (event) => {
             }
         })
         .catch(console.log);
-})
+});
 
-let employeesList = document.getElementById("employeesList");
 
 let clearDisplay = () => {
     employeesList.innerHTML = "";
-}
+};
 
-let createLi = ((employee) => {
-    let li = document.createElement("li");
-    li.innerText = `${employee.employeeFirstName} ${employee.employeeLastName} : Email ${employee.email}, Phone ${employee.phoneNumber}`;
+let createLi = (employee) => {
+    let employeeLi = document.createElement("li");
+    employeeLi.innerText = `${employee.firstName} ${employee.lastName} : Email ${employee.email}, Phone ${employee.phoneNumber}`;
 
-});
+    employeesList.append(employeeLi);
+};

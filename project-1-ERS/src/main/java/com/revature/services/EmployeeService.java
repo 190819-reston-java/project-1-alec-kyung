@@ -17,5 +17,13 @@ public class EmployeeService {
 	public Employee getLoginCredentials(String email, String userPwd) {
 		return employeeDao.getEmployeeLogin(email, userPwd);
 	}
+	
+	public Employee getEmployeeInfo(String email) {
+		return employeeDao.getEmployeeInfo(email);
+	}
+	
+	public boolean getManager() {
+		return employeeDao.isManager() != null;
+	}
 
 }

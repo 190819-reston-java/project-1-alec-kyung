@@ -11,6 +11,7 @@ public class Employee {
 	private long phoneNumber;
 	private boolean manager;
 	
+	
 	public Employee(int empId, String email, String empPwd, String firstName, String lastName, long phoneNumber,
 			boolean manager) {
 		super();
@@ -90,6 +91,8 @@ public class Employee {
 		return "Employee [empId=" + empId + ", email=" + email + ", empPwd=" + empPwd + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", manager=" + manager + "]";
 	}
+	
+	
 	
 
 
