@@ -237,8 +237,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 
 	@Override
-	public boolean isManager() {
-		boolean user = false;
+	public Employee isManager() {
+		Employee user = null;
 
 		PreparedStatement statement = null;
 		ResultSet results = null;
@@ -251,7 +251,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			if (statement.execute()) {
 				results = statement.getResultSet();
 				if (results.next()) {
-					user = createEmployeeFromRS(results) != null;
+					user = createEmployeeFromRS(results);
 					}
 				}
 		} catch (SQLException e) {
@@ -261,7 +261,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ERSStreamCloser.close(statement);
 		}
 		
-		return true;
+		return user;
 	}
 	
 

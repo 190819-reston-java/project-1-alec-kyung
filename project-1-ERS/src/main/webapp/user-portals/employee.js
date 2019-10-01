@@ -26,6 +26,14 @@ getSingleEmployeeInfo.addEventListener("submit", (event) => {
 });
 
 
+// button.addEventListener("click", (event) => {
+//     //event.preventDefault();
+//     console.log("clicked");
+
+
+
+// });
+
 
 let clearDisplay = () => {
     employeesList.innerHTML = "";
@@ -35,5 +43,5 @@ let createLi = (employee) => {
     let employeeLi = document.createElement("li");
     employeeLi.innerText = `${employee.firstName} ${employee.lastName} : Email ${employee.email}, Phone ${employee.phoneNumber}`;
 
-    employeesInfo.append(employeeLi);
+    employeesInfoCard.append(employeeLi);
 };

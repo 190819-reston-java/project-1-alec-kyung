@@ -23,7 +23,7 @@ public class EmployeeService {
 	}
 	
 	public boolean getManager() {
-		return employeeDao.isManager();
+		return employeeDao.isManager() != null;
 	}
 
 }
