@@ -34,7 +34,7 @@ let clearDisplay = () => {
 
 let createLi = (employee) => {
     let employeeLi = document.createElement("li");
-    employeeLi.innerText = `${employee.firstName} ${employee.lastName} : Email ${employee.email}, Phone ${employee.phoneNumber}`;
+    employeeLi.innerText = `Employee ID -- ${employee.empId} ${employee.firstName} ${employee.lastName} : Email -- ${employee.email}, Phone -- ${employee.phoneNumber}`;
 
     employeesList.append(employeeLi);
 };

@@ -69,7 +69,31 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
-                                <button type="submit" id="get-employees">Get All Employees</button>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" id="get-employees" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">Get Employees</button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalScrollableTitle">Employees</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul id="employeesList">
+                                                    <li>HERE IS THE LIST</li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <button type="submit" id="get-employees">Get All Employees</button> -->
 
                             </div>
                         </div>
