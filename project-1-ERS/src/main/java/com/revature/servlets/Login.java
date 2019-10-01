@@ -39,6 +39,8 @@ public class Login extends HttpServlet {
 	
 			session.setAttribute("employeeUser", user);
 			loginServletLogger.info("SESSION CONNECTED TO USER: " + session.getAttribute("employeeUser"));
+			
+			req.getSession();
 
 			//resp.sendRedirect("user-portals/test-page.html");
 			resp.sendRedirect("user-portals/employee_page.html");
