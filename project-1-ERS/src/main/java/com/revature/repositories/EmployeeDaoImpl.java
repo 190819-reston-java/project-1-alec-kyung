@@ -234,6 +234,35 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		return employeesList;
 	}
+
+
+	@Override
+	public boolean isManager() {
+		boolean user = false;
+
+		PreparedStatement statement = null;
+		ResultSet results = null;
+
+		String query = "SELECT * FROM ers.employees WHERE manager=?";
+		
+		try (Connection conn = ERSConnectionUtil.getConnection()){
+			statement = conn.prepareStatement(query);
+			statement.setBoolean(1, true);
+			if (statement.execute()) {
+				results = statement.getResultSet();
+				if (results.next()) {
+					user = createEmployeeFromRS(results) != null;
+					}
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ERSStreamCloser.close(results);
+			ERSStreamCloser.close(statement);
+		}
+		
+		return true;
+	}
 	
 
 }

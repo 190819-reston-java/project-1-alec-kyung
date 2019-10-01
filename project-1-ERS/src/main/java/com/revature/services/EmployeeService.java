@@ -21,5 +21,9 @@ public class EmployeeService {
 	public Employee getEmployeeInfo(String email) {
 		return employeeDao.getEmployeeInfo(email);
 	}
+	
+	public boolean getManager() {
+		return employeeDao.isManager();
+	}
 
 }

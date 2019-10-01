@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 		Employee verifiedEmp = employeeUser.getLoginCredentials(email, password);
 		System.out.println(verifiedEmp);
 		
+			
 		if (verifiedEmp != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", verifiedEmp);

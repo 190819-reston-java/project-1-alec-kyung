@@ -11,6 +11,8 @@ public interface EmployeeDao {
 	Employee getEmployeeInfo(String email);
 	Employee getEmployeeLogin(String email, String userPwd);
 	
+	boolean isManager();
+	
 	//Employee getResolvedReimb();
 	
 	Reimbursements getResolvedReimb();
