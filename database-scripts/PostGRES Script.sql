@@ -26,6 +26,7 @@ amount NUMERIC (10, 2) NOT NULL,
 status VARCHAR (30) NOT NULL,
 submitted_by_id INTEGER REFERENCES ers.employees(emp_id) NOT NULL,
 resolved_by_id INTEGER REFERENCES ers.employees(emp_id),
+image_url VARCHAR (100),
 submit_time TIMESTAMP
 );
 
@@ -78,7 +79,7 @@ WHERE ers.reimbursements.resolved_by_id IS NOT NULL AND ers.reimbursements.submi
 -- SET THE NUMBER to ? for java
 SELECT *
 FROM ers.employees
-WHERE emp_id = 2;
+WHERE emp_id = ?;
 
 --An Employee can update their information
 -- CANNOT UPDATE IF MANAGER OR NOT
