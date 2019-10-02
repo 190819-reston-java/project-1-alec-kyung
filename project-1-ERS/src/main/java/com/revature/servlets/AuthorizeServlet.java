@@ -3,7 +3,6 @@ package com.revature.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +14,15 @@ import org.apache.log4j.Logger;
 
 import com.revature.services.EmployeeService;
 
-public class Welcome extends HttpServlet {
+public class AuthorizeServlet extends HttpServlet {
 	
-	private static Logger welcomeLogger = Logger.getLogger(Welcome.class);
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static Logger authorizeLogger = Logger.getLogger(Welcome.class);
+	EmployeeService user = new EmployeeService();
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -33,10 +37,20 @@ public class Welcome extends HttpServlet {
 				verifiedUser = c.getValue();
 			}
 		}
-		
+	
+	
+	
 		PrintWriter out = resp.getWriter();
-		out.print("Welcome" + verifiedUser);
-
+		out.print("Welcome " + verifiedUser);
+		out.print(user.getEmployeeInfo(verifiedUser));
+		
+		//resp.sendRedirect("user-portals/employee_page.html	");
+		
 	}
-
+	
 }
+			
+
+
+
+

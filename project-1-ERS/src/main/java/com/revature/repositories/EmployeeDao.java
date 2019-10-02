@@ -13,9 +13,6 @@ public interface EmployeeDao {
 	
 	Employee isManager();
 	
-	//Employee getResolvedReimb();
-	
-	Reimbursements getResolvedReimb();
 	
 	//MANAGER MEtHODS
 	List<Employee> getAllEmployees();
