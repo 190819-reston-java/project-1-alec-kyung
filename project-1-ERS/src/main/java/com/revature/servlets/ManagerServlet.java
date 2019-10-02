@@ -58,11 +58,28 @@ public class ManagerServlet extends HttpServlet {
 				String jsonEmployee = om.writeValueAsString(employeeService.getEmployeeInfo(tokens[1]));
 			}
 		}
-		
-	
-		
-		
-		
 	}
+	
+//	//add maybe with reim service???
+//	private void getPendingReim(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException, ServletException {
+//		ObjectMapper om = new ObjectMapper();
+//		PrintWriter pw = resp.getWriter();
+//		
+//		Employee employee = null;
+//		
+//		if(req.getMethod().equals("GET")) {
+//			
+//			managerServletLogger.info("GET from JS running");
+//			if (tokens.length == 1) {
+//				String jsonEmployees = om.writeValueAsString(employeeService.get());
+//				
+//				managerServletLogger.info(jsonEmployees);
+//				
+//				pw.write(jsonEmployees);
+//			} else {
+//				String jsonEmployee = om.writeValueAsString(employeeService.getEmployeeInfo(tokens[1]));
+//			}
+//		}
+//	}
 
 }

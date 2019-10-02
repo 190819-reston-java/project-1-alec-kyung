@@ -9,6 +9,9 @@ public interface ReimbDao {
 	ArrayList<Reimbursements> getAllReimbs();
 	ArrayList<Reimbursements> getReimbsById(int empId);
 	ArrayList<Reimbursements> getReimbsByStatus(String status);
+	ArrayList<Reimbursements> getPendingReim();
+	ArrayList<Reimbursements> getResolvedReimMan();
+	
 	boolean updateReimb (int id, int resolver, int status);
 	boolean deleteReimb(int id);
 	boolean addReimb(Reimbursements reimb);
