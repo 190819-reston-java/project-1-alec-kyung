@@ -18,6 +18,8 @@ public class ReimbDaoImpl implements ReimbDao {
 		return new Reimbursements(results.getInt("reimb_id"), results.getDouble("amount"), results.getString("status"),
 				results.getInt("submitted_by_id"), results.getInt("resolved_by_id"), results.getLong("submit_time"));
 	}
+	
+	//GET ALL REIMBURSEMENTS
 	@Override
 	public ArrayList<Reimbursements> getAllReimbs() {
 
@@ -42,10 +44,7 @@ public class ReimbDaoImpl implements ReimbDao {
 				reimbInfo.setResolvedBy(results.getInt("resolved_by_id"));
 				reimbInfo.setSubmitTime(results.getLong("submit_time"));
 
-				
 				reimbursementsList.add(reimbInfo);
-
-				//employeesList.add(createEmployeeFromRS(results));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -90,7 +89,6 @@ public class ReimbDaoImpl implements ReimbDao {
 				
 				reimbursementsList.add(reimbInfo);
 
-				//employeesList.add(createEmployeeFromRS(results));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -181,7 +179,6 @@ public class ReimbDaoImpl implements ReimbDao {
 				
 				reimbRequests.add(reimbInfo);
 
-				//employeesList.add(createEmployeeFromRS(results));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -222,7 +219,6 @@ public class ReimbDaoImpl implements ReimbDao {
 				
 				reimbStatus.add(reimbInfo);
 
-				//employeesList.add(createEmployeeFromRS(results));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

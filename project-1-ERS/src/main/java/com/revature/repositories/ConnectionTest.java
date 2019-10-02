@@ -15,7 +15,7 @@ public class ConnectionTest {
 		HttpServletRequest req = null;
 		ReimbDao reimbs = new ReimbDaoImpl();
 		
-		Cookie cookies[] = req.getCookies();
+//		Cookie cookies[] = req.getCookies();
 		String user = null;
 		EmployeeService employee = new EmployeeService();
 		
@@ -25,21 +25,18 @@ public class ConnectionTest {
 			System.out.println(e);
 		}
 		
-		for (Cookie c : cookies) {
-			if (c.getName().equals("employeeUser")) {
-				user = c.getValue();
-				System.out.println(employee.getEmployeeInfo(user));
-			}
-		}
+		System.out.println(emps.getEmployeeInfo("test@test.com").getEmpId());
+		
+
 		
 //		emps.createNewAccount(new Employee(0, "test@test.com", "testpwd", "User", "Test", 9879989998L, true));
 //		
 //	
 //		System.out.println(reimbs.getAllReimbs());
 //		
-//		for (Reimbursements r : reimbs.getReimbsByStatus("resolved")) {
-//			System.out.println(r);
-//		}
+		for (Reimbursements r : reimbs.getReimbsById(2)) {
+			System.out.println(r);
+		}
 //		
 		//test.createNewAccount(new Customer(0, "Alison", "Wonderland4", "peace05", 7878, 20000));
 

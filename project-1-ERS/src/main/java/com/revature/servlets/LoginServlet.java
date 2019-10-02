@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 			
 			//COOKIES WAY
 			String empFirstName = employeeUser.getFirstName();
+			
 //			int empId = employeeUser.getEmpId();
 			Cookie cookie = new Cookie("employeeUser", email);
 			resp.addCookie(cookie);

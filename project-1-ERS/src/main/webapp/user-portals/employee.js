@@ -1,47 +1,61 @@
 'use strict';
 
-const EMPLOYEES_URL = "/project-1-ERS/manager";
+const INFO_URL = "/project-1-ERS/employee/viewInfo";
+const UPDATE_URL = "/project-1-ERS/updateInfo";
+const SUBMIT_URL = "/project-1-ERS/submitReimb";
+const PENDING_URL = "/project-1-ERS/employee/pendingReimbs";
+const RESOLVED_URL = "/project-1-ERS/resolvedReimbs";
 
 
-//Get Employee Info
-let employeeInfoCard = document.getElementById("employeeInformation");
-let getSingleEmployeeInfo = document.getElementById("get-info");
+//GET EMPLOYEE INFO
+let employeeInfoLi = document.getElementById("employeeInfo");
+let updateButton = document.getElementById("get-employee-info");
+let infoCard = document.getElementById("employeeInfoCard");
+let infoCardHeader = document.getElementById("infoCardHeader")
 
-getSingleEmployeeInfo.addEventListener("submit", (event) => {
-    event.preventDefault();
+infoCardHeader.addEventListener("click", (event) => {
+    console.log("clicked");
 
-    let email = getSingleEmployeeInfo.email.value;
-    fetch(`${EMPLOYEES_URL}/${email}`)
+    // let email = getSingleEmployeeInfo.email.value;
+    fetch(INFO_URL, { method: "GET" })
         .then((response) => {
             return response.json();
         })
         .then((employeeJson) => {
-            clearDisplay();
-            createLi(employeeJson)
+            displayInfo(employeeJson);
+            // clearDisplay();
         })
         .catch((error) => {
             console.error(error);
-            //alert(`Unable to find email`);
         });
 });
 
+let displayInfo = (employee) => {
+    let employeeCardInfo = document.createElement("p");
+    employeeCardInfo.innerText = `EMPLOYEE ID: ${employee.empId} | EMPLOYEE NAME: ${employee.firstName} ${employee.lastName} | Email: ${employee.email} | Phone: ${employee.phoneNumber}`;
+    // clearDisplay();
+    infoCard.append(employeeCardInfo);
+}
 
-// button.addEventListener("click", (event) => {
-//     //event.preventDefault();
-//     console.log("clicked");
+//VIEW PENDING REIMBURSEMENTS BY EMPLOYEE ID
+
+let pendingButton = document.getElementById("get-pending-reimbs");
 
 
 
-// });
+pendingButton.addEventListener("click", (event) => {
+    console.log("clicked");
 
-
-let clearDisplay = () => {
-    employeesList.innerHTML = "";
-};
-
-let createLi = (employee) => {
-    let employeeLi = document.createElement("li");
-    employeeLi.innerText = `${employee.firstName} ${employee.lastName} : Email ${employee.email}, Phone ${employee.phoneNumber}`;
-
-    employeesInfoCard.append(employeeLi);
-};
+    // let email = getSingleEmployeeInfo.email.value;
+    fetch(PENDING_URL, { method: "GET" })
+        .then((response) => {
+            return response.json();
+        })
+        .then((employeeJson) => {
+            displayInfo(employeeJson);
+            // clearDisplay();
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+});
