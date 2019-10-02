@@ -38,7 +38,11 @@ public class AuthorizeServlet extends HttpServlet {
 		
 		PrintWriter out = resp.getWriter();
 		out.print("Welcome " + verifiedUser);
+		
+		resp.sendRedirect("user-portals/employee_page.html4	");
+		
 	}
+	
 }
 			
 
