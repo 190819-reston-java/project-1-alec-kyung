@@ -19,7 +19,6 @@ public class ConnectionTest {
 //		
 //		System.out.println(test.getResolvedReimb());
 		
-		System.out.println(test.isManager());
 		
 
 	}
