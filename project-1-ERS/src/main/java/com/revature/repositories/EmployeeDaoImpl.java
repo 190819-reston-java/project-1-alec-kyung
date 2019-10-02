@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.model.Employee;
-import com.revature.model.Reimbursements;
+
 import com.revature.util.ERSConnectionUtil;
 import com.revature.util.ERSStreamCloser;
 
@@ -21,11 +21,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 	
-	private static Reimbursements createReimbFromRS(ResultSet results) throws SQLException {
-		return new Reimbursements(results.getInt("reimb_id"), results.getDouble("amount"), results.getString("status"),
-				results.getInt("submitted_by_id"), results.getInt("resolved_by_id"), results.getLong("submit_time"));
-	}
-	
 	@Override
 	public List<Employee> getEmployees() {
 
@@ -34,7 +29,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		String query = "SELECT * FROM ers.employees;";
 
-		List<Employee> employeesList = new ArrayList<Employee>();
+		ArrayList<Employee> employeesList = new ArrayList<Employee>();
 
 		try (Connection conn = ERSConnectionUtil.getConnection()) {
 			statement = conn.prepareStatement(query);
@@ -134,63 +129,29 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public boolean createNewAccount(Employee eu) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Reimbursements getResolvedReimb() {
-		Reimbursements user = null;
-
 		PreparedStatement statement = null;
-		ResultSet results = null;
 
-		String query = "SELECT * FROM ers.employees FULL JOIN ers.reimbursements ON ers.employees.emp_id = ers.reimbursements.submitted_by_id WHERE ers.reimbursements.resolved_by_id IS NOT NULL;";
-		
-		try (Connection conn = ERSConnectionUtil.getConnection()){
+		String query = "INSERT INTO ers.employees VALUES (DEFAULT, ?, ?, ?, ?, ?, ?);";
+
+		try (Connection conn = ERSConnectionUtil.getConnection()) {
+
 			statement = conn.prepareStatement(query);
+			statement.setString(1, eu.getEmail());
+			statement.setString(2, eu.getEmpPwd());
+			statement.setString(3, eu.getFirstName());
+			statement.setString(4, eu.getLastName());
+			statement.setLong(5, eu.getPhoneNumber());
+			statement.setBoolean(6, eu.isManager());
 
-			if (statement.execute()) {
-				results = statement.getResultSet();
-				if (results.next()) {
-					user = createReimbFromRS(results);
-					}
-				}
+			statement.execute();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		} finally {
-			ERSStreamCloser.close(results);
 			ERSStreamCloser.close(statement);
 		}
-		
-		return user;
-	}
-	
-	public Reimbursements getSubmittedById() {
-		Reimbursements user = null;
-
-		PreparedStatement statement = null;
-		ResultSet results = null;
-
-		String query = "SELECT * FROM ers.employees FULL JOIN ers.reimbursements ON ers.employees.emp_id = ers.reimbursements.submitted_by_id WHERE ers.reimbursements.resolved_by_id IS NOT NULL;";
-		
-		try (Connection conn = ERSConnectionUtil.getConnection()){
-			statement = conn.prepareStatement(query);
-
-			if (statement.execute()) {
-				results = statement.getResultSet();
-				if (results.next()) {
-					user = createReimbFromRS(results);
-					}
-				}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ERSStreamCloser.close(results);
-			ERSStreamCloser.close(statement);
-		}
-		
-		return user;
+		return true;
 	}
 
 
