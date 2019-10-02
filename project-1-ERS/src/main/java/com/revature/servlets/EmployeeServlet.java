@@ -16,6 +16,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Employee;
 import com.revature.model.Reimbursements;
+import com.revature.repositories.ReimbDao;
+import com.revature.repositories.ReimbDaoImpl;
 import com.revature.services.EmployeeService;
 
 public class EmployeeServlet extends HttpServlet {
@@ -35,18 +37,23 @@ public class EmployeeServlet extends HttpServlet {
 			
 			switch (tokens[0]) {
 			case "viewInfo":
+				employeeServletLogger.info("Entering employee info");
 				getEmployeeInfo(req, resp, tokens);
 				break;
 			case "updateInfo":
+				employeeServletLogger.info("Entering update info");
+
 				break;
 			case "submitReimb":
+				employeeServletLogger.info("Entering submit reimbursements");
+
 				break;
 			case "pendingReimbs":
+				employeeServletLogger.info("Entering pending reimbursements");
 				getPendingReimbsViaEmp(req, resp, tokens);
 				break;
 			case "resolvedReimbs":
-				
-				
+				break;
 			}
 
 			
@@ -70,9 +77,6 @@ public class EmployeeServlet extends HttpServlet {
 		
 		EmployeeService employeeService = new EmployeeService();
 
-		//GETS EMPLOYEE ID FROM THE COOKIE
-		int employeeId = employeeService.getEmployeeInfo(empCookie).getEmpId();
-		System.out.println("EMPLOYEE ID FROM COOKIE: " + employeeId);
 		
 		if(req.getMethod().equals("GET")) {
 			
@@ -94,6 +98,7 @@ public class EmployeeServlet extends HttpServlet {
 		
 		String empCookie = null;
 		Reimbursements reimbService = new Reimbursements();
+		ReimbDao reimbDB = new ReimbDaoImpl();
 		
 		for (Cookie c : cookies) {
 			if(c.getName().equals("employeeUser")) {
@@ -113,7 +118,7 @@ public class EmployeeServlet extends HttpServlet {
 		if(req.getMethod().equals("GET")) {
 			
 			if (tokens.length == 1) {
-				String jsonEmployee = om.writeValueAsString(reimbService.getSubmittedBy());
+				String jsonEmployee = om.writeValueAsString(reimbDB.getReimbsById(employeeId));
 				
 				employeeServletLogger.info("EMPLOYEE JSON: " + jsonEmployee);
 				
