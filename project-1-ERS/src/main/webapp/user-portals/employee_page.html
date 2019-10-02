@@ -49,23 +49,38 @@
                     <div class="card">
                         <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" id="employeeInformation" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="btn btn-link collapsed" id="infoCardHeader" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             View/Update Information
                                           </button>
                             </h5>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                            <div class="card-body">
-                                <!-- EMPLOYEE -->
-                                <form id="get-info">
-                                    <label for="employeeEmail">Enter Employee Email:</label>
-                                    <input type="text" name="email">
-                                    <input type="submit">
-                                </form>
+                            <div class="card-body" id="employeeInfoCard">
+                                <!-- INFO CARD BODY -->
+                                <div id="employeeInfoCard">
+                                <!-- Employee info goes here -->
+                                </div>
 
-                                <ul id="employeeInfo">
+                                <!-- Button trigger modal -->
+                                <button type="button" id="get-employee-info" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">Update Information</button>
 
-                                </ul>
+                                <!-- Popup Modal (UPDATE INFORMATION MODAL) -->
+                                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="employeeInfoModal">Update Infomration</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!-- UPDATE FORM GOES HERE -->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
@@ -80,7 +95,7 @@
                         </div>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
-                                <p><a href="reimbursement_request.html">Click here for reimbursement request</a></p>
+                                <p>Submit form goes here</p>
                             </div>
                         </div>
                     </div>

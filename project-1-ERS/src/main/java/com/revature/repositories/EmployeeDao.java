@@ -9,10 +9,12 @@ public interface EmployeeDao {
 	
 	List<Employee> getEmployees();
 	Employee getEmployeeInfo(String email);
+	
 	Employee getEmployeeLogin(String email, String userPwd);
 	
 	Employee isManager();
 	
+	Employee getEmployeeID(String email);
 	
 	//MANAGER MEtHODS
 	List<Employee> getAllEmployees();

@@ -23,6 +23,7 @@ public class AuthorizeServlet extends HttpServlet {
 	private static Logger authorizeLogger = Logger.getLogger(Welcome.class);
 	EmployeeService user = new EmployeeService();
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -37,14 +38,16 @@ public class AuthorizeServlet extends HttpServlet {
 				verifiedUser = c.getValue();
 			}
 		}
-	
+//		SESSION WAY
+		session.setAttribute("employeeUser", user.getEmployeeInfo(verifiedUser).getEmpId());
+//		resp.sendRedirect("authorize");
 	
 	
 		PrintWriter out = resp.getWriter();
 		out.print("Welcome " + verifiedUser);
-		out.print(user.getEmployeeInfo(verifiedUser));
+//		out.print(user.getEmployeeInfo(verifiedUser));
 		
-		//resp.sendRedirect("user-portals/employee_page.html	");
+		resp.sendRedirect("user-portals/employee_page.html");
 		
 	}
 	

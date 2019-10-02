@@ -224,6 +224,35 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		
 		return user;
 	}
-	
+
+
+	@Override
+	public Employee getEmployeeID(String email) {
+		Employee user = null;
+
+		PreparedStatement statement = null;
+		ResultSet results = null;
+
+		String query = "SELECT emp_id FROM ers.employees WHERE email=?";
+		
+		try (Connection conn = ERSConnectionUtil.getConnection()){
+			statement = conn.prepareStatement(query);
+			statement.setString(1, email);
+
+			if (statement.execute()) {
+				results = statement.getResultSet();
+				if (results.next()) {
+					user = createEmployeeFromRS(results);
+					}
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			ERSStreamCloser.close(results);
+			ERSStreamCloser.close(statement);
+		}
+		
+		return user;
+	}
 
 }
