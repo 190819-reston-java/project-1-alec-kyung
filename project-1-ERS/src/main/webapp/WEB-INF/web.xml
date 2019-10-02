@@ -8,7 +8,7 @@
 
 	<servlet>
 		<servlet-name>LoginServlet</servlet-name>
-		<servlet-class>com.revature.servlets.Login</servlet-class>
+		<servlet-class>com.revature.servlets.LoginServlet</servlet-class>
 	</servlet>
 
 	<servlet>

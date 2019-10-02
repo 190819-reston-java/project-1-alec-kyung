@@ -16,6 +16,10 @@ import com.revature.services.EmployeeService;
 
 public class AuthorizeServlet extends HttpServlet {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static Logger authorizeLogger = Logger.getLogger(Welcome.class);
 	EmployeeService user = new EmployeeService();
 
@@ -35,11 +39,12 @@ public class AuthorizeServlet extends HttpServlet {
 		}
 	
 	
-		
+	
 		PrintWriter out = resp.getWriter();
 		out.print("Welcome " + verifiedUser);
+		out.print(user.getEmployeeInfo(verifiedUser));
 		
-		resp.sendRedirect("user-portals/employee_page.html4	");
+		//resp.sendRedirect("user-portals/employee_page.html	");
 		
 	}
 	

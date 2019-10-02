@@ -1,20 +1,35 @@
 package com.revature.repositories;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import com.revature.model.Employee;
 import com.revature.model.Reimbursements;
+import com.revature.services.EmployeeService;
 
 public class ConnectionTest {
 
 	public static void main(String[] args) {
 		//ERSConnectionUtil.getConnection();
 		
+		HttpServletRequest req = null;
 		ReimbDao reimbs = new ReimbDaoImpl();
-
+		
+		Cookie cookies[] = req.getCookies();
+		String user = null;
+		EmployeeService employee = new EmployeeService();
 		
 		EmployeeDao emps = new EmployeeDaoImpl();
 		
 		for (Employee e : emps.getEmployees()) {
 			System.out.println(e);
+		}
+		
+		for (Cookie c : cookies) {
+			if (c.getName().equals("employeeUser")) {
+				user = c.getValue();
+				System.out.println(employee.getEmployeeInfo(user));
+			}
 		}
 		
 //		emps.createNewAccount(new Employee(0, "test@test.com", "testpwd", "User", "Test", 9879989998L, true));
