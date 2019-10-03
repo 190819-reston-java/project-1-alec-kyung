@@ -29,10 +29,7 @@ public class ReimbService {
 	public List<Reimbursements> getPendingReimList() {
 		return reimDao.getPendingReim();
 	}
-	
-	public List<Reimbursements> getResolvedReimMan() {
-		return  reimDao.getResolvedReimMan();
-	}
+
 	
 	
 	

@@ -34,9 +34,11 @@ public class ConnectionTest {
 //	
 //		System.out.println(reimbs.getAllReimbs());
 //		
-		for (Reimbursements r : reimbs.getReimbsById(2)) {
-			System.out.println(r);
-		}
+//		for (Reimbursements r : reimbs.getReimbsById(2)) {
+//			System.out.println();
+//		}
+		
+		System.out.println(employee.getResolvedReimMan());
 //		
 		//test.createNewAccount(new Customer(0, "Alison", "Wonderland4", "peace05", 7878, 20000));
 

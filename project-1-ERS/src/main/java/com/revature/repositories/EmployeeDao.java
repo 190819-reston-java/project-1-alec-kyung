@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.model.Employee;
@@ -15,8 +16,10 @@ public interface EmployeeDao {
 	
 	//MANAGER MEtHODS
 	List<Employee> getAllEmployees();
+	List<Employee> getResolvedReimMan();
 	
 	boolean updateAccount(Employee eu);
 	boolean createNewAccount(Employee eu);
+	
 
 }
