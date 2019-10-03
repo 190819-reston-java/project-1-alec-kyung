@@ -25,6 +25,7 @@ public class ReimbDaoImpl implements ReimbDao {
 				results.getString("image_url"),
 				results.getLong("submit_time")
 				);
+		
 	}
 	
 	//GET ALL REIMBURSEMENTS
@@ -106,48 +107,7 @@ public class ReimbDaoImpl implements ReimbDao {
 		return reimbursementsList;
 	}
 	
-	//--A Manager can view all resolved requests from all employees and see which manager resolved it
-	@Override
-	public ArrayList<Reimbursements> getResolvedReimMan() {
-		PreparedStatement statement = null;
-		ResultSet results = null;
-
-		String query = "SELECT emp_id, first_name, last_name\r\n" + 
-				"FROM ers.employees\r\n" + 
-				"FULL JOIN ers.reimbursements\r\n" + 
-				"ON ers.employees.emp_id = ers.reimbursements.resolved_by_id\r\n" + 
-				"WHERE ers.reimbursements.resolved_by_id IS NOT NULL;";
-
-		ArrayList<Reimbursements> reimbursementsList = new ArrayList<Reimbursements>();
-
-		try (Connection conn = ERSConnectionUtil.getConnection()) {
-			statement = conn.prepareStatement(query);
-			results = statement.executeQuery();
-
-			while (results.next()) {
-				Reimbursements reimbInfo = new Reimbursements();
-				
-				reimbInfo.setReimbId(results.getInt("reimb_id"));
-				reimbInfo.setReimbAmt(results.getDouble("amount"));
-				reimbInfo.setReimbStatus(results.getString("status"));
-				reimbInfo.setSubmittedBy(results.getInt("submitted_by_id"));
-				reimbInfo.setResolvedBy(results.getInt("resolved_by_id"));
-				reimbInfo.setImageUrl(results.getString("image_url"));
-				reimbInfo.setSubmitTime(results.getLong("submit_time"));
-
-				reimbursementsList.add(reimbInfo);
-
-				//employeesList.add(createEmployeeFromRS(results));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ERSStreamCloser.close(results);
-			ERSStreamCloser.close(statement);
-			System.out.println("Close stream");
-		}
-		return reimbursementsList;
-	}
+	
 	
 	@Override
 	public ArrayList<Reimbursements> getReimbsById(int empId) {

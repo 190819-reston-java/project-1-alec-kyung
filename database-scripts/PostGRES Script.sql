@@ -33,8 +33,8 @@ submit_time TIMESTAMP
 SELECT * FROM ers.reimbursements;
 
 INSERT INTO ers.reimbursements VALUES
-	(DEFAULT, 123.45, 'resolved', 2, 1, NULL, DEFAULT),
-	(DEFAULT, 75.21, 'resolved', 2, 1, NULL, DEFAULT),
+	(DEFAULT, 123.45, 'approved', 2, 1, NULL, DEFAULT),
+	(DEFAULT, 75.21, 'denied', 2, 1, NULL, DEFAULT),
 	(DEFAULT, 50.50, 'submitted', 2, NULL, NULL, DEFAULT),
 	(DEFAULT, 2.33, 'submitted', 2, NULL, NULL, DEFAULT);
 
@@ -101,13 +101,20 @@ FULL JOIN ers.reimbursements
 ON ers.employees.emp_id = ers.reimbursements.submitted_by_id
 WHERE ers.reimbursements.resolved_by_id IS NULL AND ers.reimbursements.submitted_by_id IS NOT NULL;
 
+--Manager see all resolved from all emplyeees
+SELECT * 
+FROM ers.employees
+FULL JOIN ers.reimbursements
+ON ers.employees.emp_id = ers.reimbursements.submitted_by_id
+WHERE ers.reimbursements.status = 'approved' OR ers.reimbursements.status = 'denied';
+
 --A Manager can view all resolved requests from all employees and see which manager resolved it
 --NO SESSION REQUIRED
 SELECT emp_id, first_name, last_name
 FROM ers.employees
 FULL JOIN ers.reimbursements
 ON ers.employees.emp_id = ers.reimbursements.resolved_by_id
-WHERE ers.reimbursements.resolved_by_id IS NOT NULL;
+WHERE ers.reimbursements.resolved_by_id IS NOT NULL AND ers.reimbursements.reimb_id = 2;
 
 --A Manager can view all Employees
 --STATIC SCRIPT, NO SESSION REQUIRED
