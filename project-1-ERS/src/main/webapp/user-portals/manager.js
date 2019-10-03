@@ -73,6 +73,7 @@ let createSRLi = (selectReimbs) => {
 //VIEW ALL PENDING REIMBURSMENTS (MANAGER)
 const VIEW_ALL_PR_URL = "/project-1-ERS/manager/view-all-pending-reimbs";
 let managerViewAllPendingButton = document.getElementById("get-all-pending-reimbs");
+let viewPRLi = document.getElementById("pendingReimbsList");
 managerViewAllPendingButton.addEventListener("click", (event) => {
     console.log("pending reimbs clicked")
     fetch(VIEW_ALL_PR_URL, { method: "GET" })
@@ -80,24 +81,23 @@ managerViewAllPendingButton.addEventListener("click", (event) => {
             // console.log(response.json());
             return response.json();
         })
-        .then((selectReimbsJson) => {
+        .then((pendingReimbsJson) => {
             clearDisplay();
-            for (let selectReimbs in selectReimbsJson) {
-                console.log("PR JSON: " + selectReimbsJson);
+            for (let pendingReimbs in pendingReimbsJson) {
+                console.log("PR JSON: " + pendingReimbsJson);
 
-                console.log("PR: " + selectReimbsJson[selectReimbs]);
+                console.log("PR: " + pendingReimbsJson[pendingReimbs]);
 
-                createPRLi(selectReimbsJson[selectReimbs]);
+                createPRLi(pendingReimbsJson[pendingReimbs]);
             }
         })
         .catch(console.log);
 });
 
 
-let createPRLi = (selectReimbs) => {
+let createPRLi = (pendingReimbs) => {
     let PRLi = document.createElement("li");
-    let linebreak = document.createElement("br");
-    PRLi.innerText = `REIMBURSEMENTID: ${selectReimbs.reimbId} | STATUS: ${selectReimbs.reimbAmt} ${selectReimbs.reimbStatus} | SUBMITTEDBY: ${selectReimbs.submittedBy} | RESOLVEDBY: ${selectReimbs.resolvedBy} | SUBMITTIME: ${selectReimbs.submitTime}`;
+    PRLi.innerText = `REIMBURSEMENT ID: ${pendingReimbs.reimbId} | AMOUNT: ${pendingReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${pendingReimbs.reimbStatus} | SUBMITTED BY: ${pendingReimbs.submittedBy} | RESOLVED BY: ${pendingReimbs.resolvedBy} | SUBMIT TIME: ${pendingReimbs.submitTime}`;
 
-    selectReimbsList.append(PRLi);
+    viewPRLi.append(PRLi);
 };
