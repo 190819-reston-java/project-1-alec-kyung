@@ -76,21 +76,26 @@ public class ManagerServletFC extends HttpServlet {
 	}
 	
 	private void selectReimbByEmployeeId(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
-		int managerInputEmployeeID = Integer.parseInt(req.getParameter("viewRequestEmpId"));
+		System.out.println("GET HERE");
 		
-		managerServletLogger.debug(managerInputEmployeeID);
+		
+		String emp = req.getParameter("viewRequestEmpId");
+		System.out.println(emp);
+//		int managerInputEmployeeID = Integer.parseInt(req.getParameter("viewRequestEmpId"));
+		
+//		managerServletLogger.debug(managerInputEmployeeID);
 		Employee employee = new Employee();
 		
 		
 		PrintWriter pw = resp.getWriter();
 
 		if(req.getMethod().equals("GET")) {
-			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(managerInputEmployeeID));
+//			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(emp));
 			
-			managerServletLogger.info(jsonReimbByEmployeeId);
-			
-			
-			pw.write(jsonReimbByEmployeeId);
+//			managerServletLogger.info(jsonReimbByEmployeeId);
+//			
+//			
+//			pw.write(jsonReimbByEmployeeId);
 		}
 		
 	}

@@ -299,4 +299,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			return employeesList;
 		}
 
+		@Override
+		public Employee isManager() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 }

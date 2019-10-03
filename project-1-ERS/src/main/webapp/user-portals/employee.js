@@ -1,7 +1,6 @@
 'use strict';
 
 const INFO_URL = "/project-1-ERS/employee/viewInfo";
-const UPDATE_URL = "/project-1-ERS/employee/updateInfo";
 const SUBMIT_URL = "/project-1-ERS/employee/submitReimb";
 const PENDING_URL = "/project-1-ERS/employee/pendingReimbs";
 const RESOLVED_URL = "/project-1-ERS/employee/resolvedReimbs";
@@ -30,7 +29,7 @@ window.addEventListener("load", (event) => {
 
 let displayInfo = (employee) => {
     let employeeCardInfo = document.createElement("p");
-    employeeCardInfo.innerText = `EMPLOYEE ID: ${employee.empId} | EMPLOYEE NAME: ${employee.firstName} ${employee.lastName} | Email: ${employee.email} | Phone: ${employee.phoneNumber}`;
+    employeeCardInfo.innerText = `EMPLOYEE ID: ${employee.empId} | EMPLOYEE NAME: ${employee.firstName} ${employee.lastName} | Email: ${employee.email} | Phone: ${employee.phoneNumber} | MANAGER: ${employee.manager}`;
     // clearDisplay();
     infoCard.append(employeeCardInfo);
 }
@@ -40,14 +39,15 @@ let updateButton = document.getElementById("get-employee-info");
 
 //VIEW PENDING REIMBURSEMENTS BY EMPLOYEE ID
 
-let pendingButton = document.getElementById("get-pending-reimbs");
+let pendingButton = document.getElementById("select-request");
 let viewPRLi = document.getElementById("employee-pending-requests");
-pendingButton.addEventListener("click", (event) => {
+pendingButton.addEventListener("submit", (event) => {
     console.log("pending button clicked");
 
     // let email = getSingleEmployeeInfo.email.value;
     fetch(PENDING_URL, { method: "GET" })
         .then((response) => {
+            console.log(response);
             return response.json();
         })
         .then((ePendingReimbs) => {
@@ -72,3 +72,27 @@ let resolvedButton = document.getElementById("get-resolved-reimbs");
 resolvedButton.addEventListener("click", (event) => {
     console.log("resolved button clicked");
 });
+
+//UPDATE EMPOYEE
+const UPDATE_URL = "/project-1-ERS/employee/updateInfo";
+
+let updateEmployee = document.getElementById("update-info");
+updatePlayer.addEventListener("submit", (event) => {
+    console.log("Update Button");
+
+    event.preventDefault();
+    fetch(UPDATE_URL, { method: "PUT", body: JSON.stringify(updateFromForm(updateEmployee)) })
+        .then((response) => {
+            if (response.status >= 200 && response.status < 300) {
+                alert("Player updated");
+            } else {
+                alert("Failed to update");
+            }
+
+        })
+});
+
+let updateFromForm = (form) => {
+    let employee = {};
+
+}
