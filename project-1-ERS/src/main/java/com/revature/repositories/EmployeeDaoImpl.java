@@ -20,7 +20,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				results.getBoolean("manager"));
 	}
 
-	
 	@Override
 	public List<Employee> getEmployees() {
 
@@ -58,7 +57,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			System.out.println("Close stream");
 
 		}
-
 		return employeesList;
 	}
 
@@ -87,10 +85,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ERSStreamCloser.close(results);
 			ERSStreamCloser.close(statement);
 		}
-		
 		return user;
 	}
-	
 
 	@Override
 	public Employee getEmployeeLogin(String email, String userPassword) {
@@ -117,7 +113,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ERSStreamCloser.close(results);
 			ERSStreamCloser.close(statement);
 		}
-		
 		return user;
 	}
 
@@ -153,7 +148,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return true;
 	}
-
 
 	@Override
 	public List<Employee> getAllEmployees() {
@@ -192,7 +186,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			System.out.println("Close stream");
 
 		}
-
 		return employeesList;
 	}
 
@@ -221,10 +214,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ERSStreamCloser.close(results);
 			ERSStreamCloser.close(statement);
 		}
-		
 		return user;
 	}
-
 
 	@Override
 	public Employee getEmployeeID(String email) {
@@ -251,7 +242,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ERSStreamCloser.close(results);
 			ERSStreamCloser.close(statement);
 		}
-		
 		return user;
 	}
 
