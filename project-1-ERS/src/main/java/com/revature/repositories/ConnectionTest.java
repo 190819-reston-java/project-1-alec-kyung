@@ -25,7 +25,7 @@ public class ConnectionTest {
 			System.out.println(e);
 		}
 		
-		System.out.println(emps.getEmployeeInfo("test@test.com").getEmpId());
+//		System.out.println(emps.getEmployeeInfo("test@test.com").getEmpId());
 		
 
 		
