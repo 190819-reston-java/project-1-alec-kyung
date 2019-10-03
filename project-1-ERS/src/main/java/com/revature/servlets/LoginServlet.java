@@ -35,34 +35,26 @@ public class LoginServlet extends HttpServlet {
 		Employee employeeUser = dbUser.getLoginCredentials(email, password);
 		
 		if (employeeUser != null) {
-//			if (dbUser.getManager()) {
-//				resp.sendRedirect("user-portals/manager_page.html");
-//			}
-			
-			//COOKIES WAY
-//			String empFirstName = employeeUser.getFirstName();
-			
-//			int empId = employeeUser.getEmpId();
-//			Cookie cookie = new Cookie("employeeUser", email);
-//			loginServletLogger.info("Cookie set in LoginServlet: " + cookie);
-//			resp.addCookie(cookie);
-			
-			
-			//SESSION WAY
-			HttpSession session = req.getSession();
-			session.setAttribute("employeeSession", employeeUser);
-			
-			
-			loginServletLogger.info("Session set in LoginServlet");
+			if (dbUser.getEmployeeInfo(email).getManager()) {
+				//SESSION WAY
+				HttpSession session = req.getSession();
+				session.setAttribute("employeeSession", employeeUser);
+				loginServletLogger.debug("Session set in LoginServlet" + employeeUser);	
+				loginServletLogger.info("Redirect to Manager page");
 
-			loginServletLogger.info("Session set in LoginServlet" + employeeUser);
+				resp.sendRedirect("user-portals/manager_page.html");
+			} else {
+				//SESSION WAY
+				HttpSession session = req.getSession();
+				session.setAttribute("employeeSession", employeeUser);
+				loginServletLogger.debug("Session set in LoginServlet" + employeeUser);	
+				loginServletLogger.info("Redirect to Employee page");
 
-//			loginServletLogger.info("Redirect to AuthorizeServlet");
-//			resp.sendRedirect("authorize");
-			
-			loginServletLogger.info("Redirect to main page");
-			resp.sendRedirect("user-portals/employee_page.html");
-			
+				resp.sendRedirect("user-portals/employee_page.html");
+				
+			}
+				
+//			resp.sendRedirect("user-portals/employee_page.html");
 		} else {
 			pw.println("Username or Password Incorrect");
 			resp.setContentType("text/html;charset=UTF-8");
