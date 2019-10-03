@@ -11,39 +11,51 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Employee;
+import com.revature.repositories.ReimbDao;
+import com.revature.repositories.ReimbDaoImpl;
 import com.revature.services.EmployeeService;
 
 public class ManagerServlet extends HttpServlet {
 	
 	private static Logger managerServletLogger = Logger.getLogger(ManagerServlet.class);
 	
-	private EmployeeService employeeService = new EmployeeService();
-	
+	private ReimbDao dbReimbs = new ReimbDaoImpl();
+	private ObjectMapper om = new ObjectMapper();
+
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String[] splitURI = req.getRequestURI().split("/");
 		
 		managerServletLogger.debug("Employee Split URI: " + Arrays.toString(splitURI));
 		
-		String[] tokens = Arrays.copyOfRange(splitURI, 2, splitURI.length);
+		String[] tokens = Arrays.copyOfRange(splitURI, 3, splitURI.length);
 		
 		managerServletLogger.debug(Arrays.toString(tokens));
 		
 		switch (tokens[0]) {
-		case "manager":
+		case "get-employees":
 			getEmployees(req, resp, tokens);
-			
+			break;
+		case "select-reimb":
+			selectReimbByEmployeeId(req, resp, tokens);
+		case "view-all-pending-reimbs":
+			viewAllPendingReimbs(req, resp, tokens);
+			break;
 		}
 		
 	}
 	
+
+
 	private void getEmployees(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException, ServletException {
-		ObjectMapper om = new ObjectMapper();
+//		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
-		
-		Employee employee = null;
+		EmployeeService employeeService = new EmployeeService();
 		
 		if(req.getMethod().equals("GET")) {
 			
@@ -60,26 +72,49 @@ public class ManagerServlet extends HttpServlet {
 		}
 	}
 	
-//	//add maybe with reim service???
-//	private void getPendingReim(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException, ServletException {
-//		ObjectMapper om = new ObjectMapper();
-//		PrintWriter pw = resp.getWriter();
-//		
-//		Employee employee = null;
-//		
-//		if(req.getMethod().equals("GET")) {
-//			
-//			managerServletLogger.info("GET from JS running");
-//			if (tokens.length == 1) {
-//				String jsonEmployees = om.writeValueAsString(employeeService.get());
-//				
-//				managerServletLogger.info(jsonEmployees);
-//				
-//				pw.write(jsonEmployees);
-//			} else {
-//				String jsonEmployee = om.writeValueAsString(employeeService.getEmployeeInfo(tokens[1]));
-//			}
-//		}
-//	}
+	private void selectReimbByEmployeeId(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
+		String managerInputEmployeeID = req.getParameter("viewRequestEmpId");
+		int selectReimb = Integer.valueOf(managerInputEmployeeID);
+		
+		managerServletLogger.debug(selectReimb);
+		Employee employee = new Employee();
+		
+		int reimbByEmployee = employee.getEmpId(selectReimb);
+		
+		PrintWriter pw = resp.getWriter();
+
+		if(req.getMethod().equals("GET")) {
+			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(reimbByEmployee));
+			
+			managerServletLogger.info(jsonReimbByEmployeeId);
+			
+			
+			pw.write(jsonReimbByEmployeeId);
+		}
+		
+	}
+	
+	private void viewAllPendingReimbs(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
+		ObjectMapper om = new ObjectMapper();
+		PrintWriter pw = resp.getWriter();
+//		ReimbDao dbReimbs = new ReimbDaoImpl();
+		
+		
+		if(req.getMethod().equals("GET")) {
+			
+			
+			managerServletLogger.info("GET from JS running");
+			if (tokens.length == 1) {
+				String jsonEmployees = om.writeValueAsString(dbReimbs.getPendingReim());
+				
+				managerServletLogger.info(jsonEmployees);
+				
+				pw.write(jsonEmployees);
+			} else {
+//				String jsonEmployee = om.writeValueAsString(db.getEmployeeInfo(tokens[1]));
+			}
+		}
+	}
+
 
 }

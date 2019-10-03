@@ -100,9 +100,11 @@
                     <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body">
                             <div class=form-group>
-                                <input type="number" id="viewRequestEmpId" placeholder="Enter Employee ID">
-                                <!-- Button trigger modal -->
-                                <button type="button" value="submit" id="select-request" class="btn btn-primary" data-toggle="modal" data-target="#selectReimbModal">View Reimbursement Request</button>
+                                <form id="select-reimb">
+                                    <input type="number" id="viewRequestEmpId" placeholder="Enter Employee ID">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" id="select-request" class="btn btn-primary" data-toggle="modal" data-target="#selectReimbModal">View Reimbursement Request</button>
+                                </form>
 
                                 <!-- Popup Modal (SELECT REIMBURSEMENT MODAL) -->
                                 <div class="modal fade" id="selectReimbModal" tabindex="-1" role="dialog" aria-labelledby="selectReimbModalTitle" aria-hidden="true">
