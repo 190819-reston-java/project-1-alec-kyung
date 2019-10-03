@@ -33,10 +33,10 @@ submit_time TIMESTAMP
 SELECT * FROM ers.reimbursements;
 
 INSERT INTO ers.reimbursements VALUES
-	(DEFAULT, 123.45, 'resolved', 2, 1, DEFAULT),
-	(DEFAULT, 75.21, 'resolved', 2, 1, DEFAULT),
-	(DEFAULT, 50.50, 'submitted', 2, NULL, DEFAULT),
-	(DEFAULT, 2.33, 'submitted', 2, NULL, DEFAULT);
+	(DEFAULT, 123.45, 'resolved', 2, 1, NULL, DEFAULT),
+	(DEFAULT, 75.21, 'resolved', 2, 1, NULL, DEFAULT),
+	(DEFAULT, 50.50, 'submitted', 2, NULL, NULL, DEFAULT),
+	(DEFAULT, 2.33, 'submitted', 2, NULL, NULL, DEFAULT);
 
 --This shows resolved reimbursements
 SELECT * 
@@ -90,7 +90,8 @@ SET emp_id = ?, email = ?, pwd = ?, first_name = ?, last_name = ?, phone_number 
 --A Manager can approve/deny pending reimbursement requests
 --???? FOR JAVA
 UPDATE ers.reimbursements
-SET status =?, resolved_by_id = ?;
+SET status =?
+WHERE reimb_id = ?;
 
 --A Manager can view all pending requests from all employees
 --NO SESSION REQUIRED, STATIC SQL SCRIPT
