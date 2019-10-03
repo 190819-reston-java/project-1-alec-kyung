@@ -84,7 +84,7 @@ public class ManagerServlet extends HttpServlet {
 		PrintWriter pw = resp.getWriter();
 
 		if(req.getMethod().equals("GET")) {
-			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(reimbByEmployee));
+			String jsonReimbByEmployeeId = om.writeValueAsString(reimbByEmployee);
 			
 			managerServletLogger.info(jsonReimbByEmployeeId);
 			
