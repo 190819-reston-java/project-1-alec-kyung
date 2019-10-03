@@ -117,34 +117,31 @@ public class EmployeeServletFC extends HttpServlet {
 		//Gets employee ID using cookies
 //		int employeeId = employeeService.getEmployeeInfo(empCookie).getEmpId();
 //		System.out.println("EMPLOYEE ID FROM COOKIE: " + employeeId);
-		
-		
-		//SESSION WAY
-		HttpSession session = req.getSession();
-		Object employeeInfo = session.getAttribute("employeeSession");
-		employeeServletLogger.debug("Employee Session Received: " + employeeInfo);
-		
-		//Gets employee ID from session
-		Employee employee = (Employee) employeeInfo;
-		int employeeId = employee.getEmpId();
-		employeeServletLogger.debug("EMPLOYEE ID FROM SESSION: " + employeeId);
-		
-		ArrayList<Reimbursements> retrievePending = reimbDB.getReimbsById(employeeId);
-		employeeServletLogger.debug(retrievePending);
+
 		
 		if(req.getMethod().equals("GET")) {
+
+			
 			System.out.println(tokens.length);
 			
 			if (tokens.length == 1) {
-				for (Reimbursements r : reimbDB.getReimbsById(employeeId)) {
-					System.out.println("Reimbursements by ID: "+ r);				
-					String jsonPendingReimbs = om.writeValueAsString(r);
+				
+				// SESSION WAY
+				HttpSession session = req.getSession();
+				Object employeeInfo = session.getAttribute("employeeSession");
+				employeeServletLogger.debug("Employee Session Received: " + employeeInfo);
+			
+
+				//Gets employee ID from session
+				Employee employee = (Employee) employeeInfo;
+				int employeeId = employee.getEmpId();
+				employeeServletLogger.debug("EMPLOYEE ID FROM SESSION: " + employeeId);
+					String jsonPendingReimbs = om.writeValueAsString(reimbDB.getReimbsById(employeeId));
 					
 					employeeServletLogger.info("Pending Reimbursements JSON: " + jsonPendingReimbs);
 					
 					pw.write(jsonPendingReimbs);
 
-				}
 				
 			} 
 		}

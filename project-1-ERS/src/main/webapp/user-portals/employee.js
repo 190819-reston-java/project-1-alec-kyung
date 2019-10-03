@@ -41,7 +41,7 @@ let updateButton = document.getElementById("get-employee-info");
 //VIEW PENDING REIMBURSEMENTS BY EMPLOYEE ID
 
 let pendingButton = document.getElementById("get-pending-reimbs");
-
+let viewPRLi = document.getElementById("employee-pending-requests");
 pendingButton.addEventListener("click", (event) => {
     console.log("pending button clicked");
 
@@ -50,14 +50,21 @@ pendingButton.addEventListener("click", (event) => {
         .then((response) => {
             return response.json();
         })
-        .then((employeeJson) => {
-            displayInfo(employeeJson);
+        .then((ePendingReimbs) => {
+            createPRLi(ePendingReimbs);
             // clearDisplay();
         })
         .catch((error) => {
             console.error(error);
         });
 });
+
+let createPRLi = (ePendingReimbs) => {
+    let PRLi = document.createElement("li");
+    PRLi.innerText = `REIMBURSEMENT ID: ${ePendingReimbs.reimbId} | AMOUNT: ${ePendingReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${ePendingReimbs.reimbStatus} | SUBMITTED BY: ${ePendingReimbs.submittedBy} | RESOLVED BY: ${ePendingReimbs.resolvedBy} | SUBMIT TIME: ${ePendingReimbs.submitTime}`;
+
+    viewPRLi.append(PRLi);
+};
 
 //VIEW RESOLVED REIMBURSEMENTS BY EMPLOYEE ID
 let resolvedButton = document.getElementById("get-resolved-reimbs");

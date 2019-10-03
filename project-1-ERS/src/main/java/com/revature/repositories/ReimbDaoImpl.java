@@ -76,7 +76,7 @@ public class ReimbDaoImpl implements ReimbDao {
 				"FULL JOIN ers.reimbursements\r\n" + 
 				"ON ers.employees.emp_id = ers.reimbursements.submitted_by_id\r\n" + 
 				"WHERE ers.reimbursements.resolved_by_id IS NULL AND ers.reimbursements.submitted_by_id IS NOT NULL;";
-
+		
 		ArrayList<Reimbursements> reimbursementsList = new ArrayList<Reimbursements>();
 
 		try (Connection conn = ERSConnectionUtil.getConnection()) {
@@ -112,11 +112,15 @@ public class ReimbDaoImpl implements ReimbDao {
 		PreparedStatement statement = null;
 		ResultSet results = null;
 
-		String query = "SELECT emp_id, first_name, last_name\r\n" + 
-				"FROM ers.employees\r\n" + 
-				"FULL JOIN ers.reimbursements\r\n" + 
-				"ON ers.employees.emp_id = ers.reimbursements.resolved_by_id\r\n" + 
+		String query = "SELECT emp_id, first_name, last_name " + 
+				"FROM ers.employees " + 
+				"FULL JOIN ers.reimbursements " + 
+				"ON ers.employees.emp_id = ers.reimbursements.resolved_by_id " + 
 				"WHERE ers.reimbursements.resolved_by_id IS NOT NULL;";
+		
+		
+//		String query = "SELECT * FROM ers.reimbursements WHERE resolved_by_id IS NOT NULL;";
+
 
 		ArrayList<Reimbursements> reimbursementsList = new ArrayList<Reimbursements>();
 

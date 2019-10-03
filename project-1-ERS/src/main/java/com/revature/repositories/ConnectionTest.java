@@ -45,7 +45,10 @@ public class ConnectionTest {
 		}
 //		
 		
-		System.out.println("REIMBS BY ID: " + reimbs.getReimbsById(1));
+		
+		System.out.println("REIMBS BY ID: " + reimbs.getReimbsById(2));
+//		
+//		System.out.println("RESOLVED REIMBS: " + reimbs.getResolvedReimMan());
 
 		//test.createNewAccount(new Customer(0, "Alison", "Wonderland4", "peace05", 7878, 20000));
 
