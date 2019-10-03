@@ -1,14 +1,13 @@
 'use strict';
 
 const GET_EMPLOYEES_URL = "/project-1-ERS/manager";
-let getEmployees = document.getElementById("get-employees");
+
+//GET ALL EMPLOYEES
+let getEmployeesButton = document.getElementById("get-employees");
 let employeesList = document.getElementById("employeesList");
-// let loginVerify = document.getElementById("test-login");
 
-//getEmployees.addEventListener("click", console.log("clicked"));
-
-getEmployees.addEventListener("click", (event) => {
-    console.log("clicked");
+getEmployeesButton.addEventListener("click", (event) => {
+    console.log("employees button clicked");
     fetch(GET_EMPLOYEES_URL, { method: "GET" })
         .then((response) => {
             // console.log(response.json());
@@ -34,7 +33,45 @@ let clearDisplay = () => {
 
 let createLi = (employee) => {
     let employeeLi = document.createElement("li");
-    employeeLi.innerText = `Employee ID -- ${employee.empId} ${employee.firstName} ${employee.lastName} : Email -- ${employee.email}, Phone -- ${employee.phoneNumber}`;
+    let linebreak = document.createElement("br");
+    employeeLi.innerText = `EMPLOYEEID: ${employee.empId} | EMPLOYEENAME: ${employee.firstName} ${employee.lastName} | EMAIL: ${employee.email} | PHONE: ${employee.phoneNumber} ${linebreak}`;
 
     employeesList.append(employeeLi);
+};
+
+//SEARCH REIMBURSMENT
+let selectEmpReimbButton = document.getElementById("select-request");
+selectEmpReimbButton.addEventListener("click", (event) => {
+    console.log("select reimbursement clicked");
+});
+
+//VIEW ALL PENDING REIMBURSMENTS (MANAGER)
+let managerViewAllPendingButton = document.getElementById("get-all-pending-reimbs");
+managerViewAllPendingButton.addEventListener("click", (event) => {
+    console.log("pending reimbs clicked")
+    fetch(GET_EMPLOYEES_URL, { method: "GET" })
+        .then((response) => {
+            // console.log(response.json());
+            return response.json();
+        })
+        .then((pendingReimbsJson) => {
+            clearDisplay();
+            for (let pendingReimbs in pendingReimbsJson) {
+                console.log("PR JSON: " + pendingReimbsJson);
+
+                console.log("PR: " + pendingReimbsJson[pendingReimbs]);
+
+                createPRLi(pendingReimbsJson[pendingReimbs]);
+            }
+        })
+        .catch(console.log);
+});
+
+
+let createPRLi = (pendingReimbs) => {
+    let PRLi = document.createElement("li");
+    let linebreak = document.createElement("br");
+    PRLi.innerText = `EMPLOYEEID: ${employee.empId} | EMPLOYEENAME: ${employee.firstName} ${employee.lastName} | EMAIL: ${employee.email} | PHONE: ${employee.phoneNumber} ${linebreak}`;
+
+    pendingReimbsList.append(employeeLi);
 };

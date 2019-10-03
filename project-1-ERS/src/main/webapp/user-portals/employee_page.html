@@ -39,22 +39,27 @@
 
     <h2>Employee Portal</h2>
 
+
     <div class="container">
+        <!--ROW 1 COLUMN 1 -->
         <div class="row">
             <div class="col-md-2">
                 <p>If you have any questions, please contact your manager or Human Resources representative.</p>
             </div>
+            <!-- ROW 1 COLUMN 2 -->
             <div class="col-md-8">
+                <!-- ACCORDION -->
                 <div id="accordion">
+                    <!-- Accordion Card 1 -->
                     <div class="card">
                         <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" id="infoCardHeader" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="btn btn-link collapsed" id="infoCardHeader" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                             View/Update Information
                                           </button>
                             </h5>
                         </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body" id="employeeInfoCard">
                                 <!-- INFO CARD BODY -->
                                 <div id="employeeInfoCard">
@@ -62,10 +67,10 @@
                                 </div>
 
                                 <!-- Button trigger modal -->
-                                <button type="button" id="get-employee-info" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">Update Information</button>
+                                <button type="button" id="get-employee-info" class="btn btn-primary" data-toggle="modal" data-target="#updateModal">Update Information</button>
 
                                 <!-- Popup Modal (UPDATE INFORMATION MODAL) -->
-                                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -73,93 +78,138 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <!-- UPDATE FORM GOES HERE -->
+                                                <div class="form-group">
+                                                    <form>
+                                                        <input type="name" id="update-first-name">
+                                                        <input type="name" id="update-last-name">
+                                                        <input type="phone" id="update-phone">
+                                                        <input type="email" id="update-email">
+                                                        <input type="password" id="update-password">
+                                                    </form>
+                                                </div>
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" value="submit" id="update-info" class="btn btn-primary">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
+                                <!-- Modal Code Ends -->
                             </div>
                         </div>
                     </div>
+                    <!-- Accordion Card 2 -->
                     <div class="card">
-                        <div class="card-header" id="headingOne">
+                        <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                     Submit Reimbursement Request
                                 </button>
                             </h5>
                         </div>
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
-                                <p>Submit form goes here</p>
+                                <div class="form-group">
+                                    <form>
+                                        <label for="reimb-amt">Enter Reimbursement Amount:</label><br>
+                                        <input type="number" id="reimb-amt"><br>
+                                        <br>
+                                        <label for="receipt-upload">Insert Receipt Image:</label><br>
+                                        <input type="file" class="form-control-file" id="receipt-upload"><br>
+                                        <input type="submit">
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
                     </div>
+                    <!-- Accordion Card 3 -->
                     <div class="card">
-                        <div class="card-header" id="headingTwo">
+                        <div class="card-header" id="headingThree">
                             <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     View Pending Reimbursement Requests
                                   </button>
                             </h5>
                         </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                             <div class="card-body">
 
-
                                 <!-- Button trigger modal -->
-                                <button type="button" id="get-pending-reimbs" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">Update Information</button>
+                                <button type="button" id="get-pending-reimbs" class="btn btn-primary" data-toggle="modal" data-target="#pendingModalScrollable">View Pending Requests</button>
 
-                                <!-- Popup Modal (PENDING REIMBS MODAL) -->
-                                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                <!-- Popup Modal (VIEW PENDING MODAL) -->
+                                <div class="modal fade" id="pendingModalScrollable" tabindex="-1" role="dialog" aria-labelledby="pendingModalScrollableTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="pendingInfoModal">Update Infomration</h5>
+                                                <h5 class="modal-title" id="employeePendingModal">Pending Reimbursement Requests</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             </div>
                                             <div class="modal-body">
-                                                <!-- UPDATE FORM GOES HERE -->
+                                                <p>PENDING Reimbursement</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="headingThree">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    View Resolved Reimbursement Requests
-                                  </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                            <div class="card-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                                                on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                                                occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-                            <div class="col-md-2">
-                                <p>View/Update Information</p>
-                            </div>
+                            <!-- Modal Code Ends -->
                         </div>
                     </div>
+                </div>
+                <!-- Accordion Card 4 -->
+                <div class="card">
+                    <div class="card-header" id="headingFour">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    View Resolved Reimbursement Requests
+                                  </button>
+                        </h5>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                        <div class="card-body">
 
-                    <script src="employee.js"></script>
-                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+                            <!-- Button trigger modal -->
+                            <button type="button" id="get-resolved-reimbs" class="btn btn-primary" data-toggle="modal" data-target="#resolvedModalScrollable">View Resolved Requests</button>
+
+                            <!-- Popup Modal (VIEW RESOLVED MODAL) -->
+                            <div class="modal fade" id="resolvedModalScrollable" tabindex="-1" role="dialog" aria-labelledby="resolvedModalScrollableTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="employeeInfoModal">Update Infomration</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- UPDATE FORM GOES HERE -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Code Ends -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="col-md-2">
+            </div>
+        </div>
+    </div>
+
+    <script src="employee.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>
