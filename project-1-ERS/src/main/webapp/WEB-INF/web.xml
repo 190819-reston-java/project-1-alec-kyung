@@ -13,7 +13,7 @@
 
 	<servlet>
 		<servlet-name>ManagerServlet</servlet-name>
-		<servlet-class>com.revature.servlets.ManagerServlet</servlet-class>
+		<servlet-class>com.revature.servlets.ManagerServletFC</servlet-class>
 	</servlet>
 	
 	<servlet>
@@ -26,7 +26,7 @@
 	</servlet>
 		<servlet>
 		<servlet-name>EmployeeServlet</servlet-name>
-		<servlet-class>com.revature.servlets.EmployeeServlet</servlet-class>
+		<servlet-class>com.revature.servlets.EmployeeServletFC</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>

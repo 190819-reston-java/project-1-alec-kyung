@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.revature.model.Employee;
 import com.revature.model.Reimbursements;
 import com.revature.services.EmployeeService;
+import com.revature.services.ReimbService;
 
 public class ConnectionTest {
 
@@ -14,6 +15,7 @@ public class ConnectionTest {
 		
 		HttpServletRequest req = null;
 		ReimbDao reimbs = new ReimbDaoImpl();
+		ReimbService reimbsService = new ReimbService();
 		
 //		Cookie cookies[] = req.getCookies();
 		String user = null;
@@ -25,6 +27,9 @@ public class ConnectionTest {
 			System.out.println(e);
 		}
 		
+//		System.out.println(reimbsService.getPendingReimList());
+		
+		
 //		System.out.println(emps.getEmployeeInfo("test@test.com").getEmpId());
 		
 
@@ -34,10 +39,14 @@ public class ConnectionTest {
 //	
 //		System.out.println(reimbs.getAllReimbs());
 //		
+		System.out.println("============REIMBURSEMENT TESTS=================");
 		for (Reimbursements r : reimbs.getReimbsById(2)) {
 			System.out.println(r);
 		}
 //		
+		
+		System.out.println("REIMBS BY ID: " + reimbs.getReimbsById(1));
+
 		//test.createNewAccount(new Customer(0, "Alison", "Wonderland4", "peace05", 7878, 20000));
 
 

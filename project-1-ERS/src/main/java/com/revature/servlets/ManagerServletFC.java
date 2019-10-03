@@ -18,9 +18,9 @@ import com.revature.repositories.ReimbDao;
 import com.revature.repositories.ReimbDaoImpl;
 import com.revature.services.EmployeeService;
 
-public class ManagerServlet extends HttpServlet {
+public class ManagerServletFC extends HttpServlet {
 	
-	private static Logger managerServletLogger = Logger.getLogger(ManagerServlet.class);
+	private static Logger managerServletLogger = Logger.getLogger(ManagerServletFC.class);
 	
 	private ReimbDao dbReimbs = new ReimbDaoImpl();
 	private ObjectMapper om = new ObjectMapper();
@@ -79,17 +79,17 @@ public class ManagerServlet extends HttpServlet {
 		managerServletLogger.debug(selectReimb);
 		Employee employee = new Employee();
 		
-		int reimbByEmployee = employee.getEmpId(selectReimb);
+//		int reimbByEmployee = employee.getEmpId(selectReimb);
 		
 		PrintWriter pw = resp.getWriter();
 
 		if(req.getMethod().equals("GET")) {
-			String jsonReimbByEmployeeId = om.writeValueAsString(reimbByEmployee);
+//			String jsonReimbByEmployeeId = om.writeValueAsString(reimbByEmployee);
 			
-			managerServletLogger.info(jsonReimbByEmployeeId);
-			
-			
-			pw.write(jsonReimbByEmployeeId);
+//			managerServletLogger.info(jsonReimbByEmployeeId);
+//			
+//			
+//			pw.write(jsonReimbByEmployeeId);
 		}
 		
 	}

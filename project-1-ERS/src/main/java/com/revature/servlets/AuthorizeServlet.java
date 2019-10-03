@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.revature.model.Employee;
 import com.revature.services.EmployeeService;
 
 public class AuthorizeServlet extends HttpServlet {
@@ -27,24 +28,29 @@ public class AuthorizeServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		HttpSession session = req.getSession();
-		
-		Cookie cookies[] = req.getCookies();
-		
-		String verifiedUser = null;
-		
-		for (Cookie c : cookies) {
-			if(c.getName().equals("employeeUser")) {
-				verifiedUser = c.getValue();
-			}
-		}
-//		SESSION WAY
-		session.setAttribute("employeeUser", user.getEmployeeInfo(verifiedUser).getEmpId());
-//		resp.sendRedirect("authorize");
 	
+//		Employee user = new Employee();
+
+//		
+//		Cookie cookies[] = req.getCookies();
+//		
+//		String verifiedUser = null;
+//		
+//		for (Cookie c : cookies) {
+//			if(c.getName().equals("employeeUser")) {
+//				verifiedUser = c.getValue();
+//				authorizeLogger.info("Cookie set: " + verifiedUser);
+//			}
+//		}
+		//SESSION
+		HttpSession session = req.getSession();
+		Employee userSession = new Employee();
+		userSession = (Employee) session.getAttribute("employeeSession");
 	
 		PrintWriter out = resp.getWriter();
-		out.print("Welcome " + verifiedUser);
+		out.print(userSession);
+		
+//		out.print("Welcome " + verifiedUser);
 //		out.print(user.getEmployeeInfo(verifiedUser));
 		
 		resp.sendRedirect("user-portals/employee_page.html");

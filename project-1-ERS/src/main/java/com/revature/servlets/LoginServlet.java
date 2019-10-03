@@ -24,7 +24,6 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/html;charset=UTF-8");
 		PrintWriter pw = resp.getWriter();
 		EmployeeService dbUser = new EmployeeService();
 
@@ -38,27 +37,30 @@ public class LoginServlet extends HttpServlet {
 		if (employeeUser != null) {
 			
 			//COOKIES WAY
-			String empFirstName = employeeUser.getFirstName();
+//			String empFirstName = employeeUser.getFirstName();
 			
 //			int empId = employeeUser.getEmpId();
-			Cookie cookie = new Cookie("employeeUser", email);
-			resp.addCookie(cookie);
+//			Cookie cookie = new Cookie("employeeUser", email);
+//			loginServletLogger.info("Cookie set in LoginServlet: " + cookie);
+//			resp.addCookie(cookie);
 			
-			resp.sendRedirect("authorize");
 			
 			//SESSION WAY
-//			HttpSession session = req.getSession();
-//			session.setAttribute("employeeUser", employeeUser);
+			HttpSession session = req.getSession();
+			session.setAttribute("employeeSession", employeeUser);
+			loginServletLogger.info("Session set in LoginServlet");
+
+			
+//			loginServletLogger.info("Redirect to AuthorizeServlet");
 //			resp.sendRedirect("authorize");
 			
-//			RequestDispatcher rs = req.getRequestDispatcher("index.html");
-//			rs.include(req, resp);
-			//resp.sendRedirect("user-portals/test-page.html");
-			//resp.sendRedirect("user-portals/employee_page.html");
-//			resp.sendRedirect("authorize");
+			loginServletLogger.info("Redirect to main page");
+			resp.sendRedirect("user-portals/employee_page.html");
 			
 		} else {
 			pw.println("Username or Password Incorrect");
+			resp.setContentType("text/html;charset=UTF-8");
+
 		
 			resp.sendRedirect("index.html");
 		}
