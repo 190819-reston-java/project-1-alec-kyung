@@ -25,5 +25,9 @@ public class EmployeeService {
 	public boolean getManager() {
 		return employeeDao.isManager() != null;
 	}
+	
+	public List<Employee> getResolvedReimMan() {
+	return  employeeDao.getResolvedReimMan();
+	}
 
 }

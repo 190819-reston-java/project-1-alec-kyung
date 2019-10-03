@@ -39,10 +39,18 @@ public class ConnectionTest {
 //	
 //		System.out.println(reimbs.getAllReimbs());
 //		
+
 		System.out.println("============REIMBURSEMENT TESTS=================");
 		for (Reimbursements r : reimbs.getReimbsById(2)) {
 			System.out.println(r);
 		}
+
+//		for (Reimbursements r : reimbs.getReimbsById(2)) {
+//			System.out.println();
+//		}
+		
+		System.out.println(employee.getResolvedReimMan());
+
 //		
 		
 		
