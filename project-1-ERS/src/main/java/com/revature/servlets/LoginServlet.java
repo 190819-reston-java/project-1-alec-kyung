@@ -25,19 +25,37 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter pw = resp.getWriter();
-		EmployeeService dbUser = new EmployeeService();
-
+		EmployeeService employeeService = new EmployeeService();
+		EmployeeDao dbUser = new EmployeeDaoImpl();
 		
 		String email = req.getParameter("userEmail");
 		String password = req.getParameter("userPassword");
 
 		loginServletLogger.info("Inputs from form: " + email + password);
-		Employee employeeUser = dbUser.getLoginCredentials(email, password);
+		Employee employeeUser = employeeService.getLoginCredentials(email, password);
 		
 		if (employeeUser != null) {
-//			if (dbUser.getManager()) {
+			
+			int employeeId = employeeUser.getEmpId();
+			loginServletLogger.debug(employeeId);
+			
+			if ((dbUser.isManager(employeeId))) {
+				//SESSION WAY
+				HttpSession session = req.getSession();
+				session.setAttribute("employeeSession", employeeUser);
+				
+				
+				loginServletLogger.info("Session set in LoginServlet");
+
+				loginServletLogger.info("Session set in LoginServlet" + employeeUser);
+
+//				loginServletLogger.info("Redirect to AuthorizeServlet");
+//				resp.sendRedirect("authorize");
+				
+				loginServletLogger.info("Redirect to main page");
 //				resp.sendRedirect("user-portals/manager_page.html");
-//			}
+				
+			}
 			
 			//COOKIES WAY
 //			String empFirstName = employeeUser.getFirstName();

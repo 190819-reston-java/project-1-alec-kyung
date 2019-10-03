@@ -136,7 +136,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			statement.setString(3, eu.getFirstName());
 			statement.setString(4, eu.getLastName());
 			statement.setLong(5, eu.getPhoneNumber());
-			statement.setBoolean(6, eu.isManager());
+			statement.setBoolean(6, eu.getManager());
 
 			statement.execute();
 
@@ -191,7 +191,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 
 	@Override
-	public Employee isManager(int empId) {
+	public boolean isManager(int empId) {
 		Employee user = null;
 
 		PreparedStatement statement = null;

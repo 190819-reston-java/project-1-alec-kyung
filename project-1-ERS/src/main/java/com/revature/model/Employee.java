@@ -77,7 +77,7 @@ public class Employee {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public boolean isManager() {
+	public boolean getManager() {
 		return manager;
 	}
 

@@ -22,8 +22,8 @@ public class EmployeeService {
 		return employeeDao.getEmployeeInfo(email);
 	}
 	
-	public boolean getManager() {
-		return employeeDao.isManager() != null;
+	public Employee getManager(int empId) {
+		return employeeDao.isManager(empId);
 	}
 	
 	public List<Employee> getResolvedReimMan() {

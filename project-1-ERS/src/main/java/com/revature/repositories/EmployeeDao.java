@@ -11,7 +11,7 @@ public interface EmployeeDao {
 	List<Employee> getEmployees();
 	Employee getEmployeeInfo(String email);
 	Employee getEmployeeLogin(String email, String userPwd);
-	Employee isManager(int empId);
+	boolean isManager(int empId);
 	Employee getEmployeeID(String email);
 	
 	//MANAGER MEtHODS
