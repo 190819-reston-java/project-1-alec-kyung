@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.model.Employee;
-
+import com.revature.model.Reimbursements;
 import com.revature.util.ERSConnectionUtil;
 import com.revature.util.ERSStreamCloser;
 
@@ -244,5 +244,49 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return user;
 	}
+	
+		//--A Manager can view all resolved requests from all employees and see which manager resolved it
+		@Override
+		public List<Employee> getResolvedReimMan() {
+			PreparedStatement statement = null;
+			ResultSet results = null;
+
+			String query = "SELECT emp_id, first_name, last_name\r\n" + 
+					"FROM ers.employees\r\n" + 
+					"FULL JOIN ers.reimbursements\r\n" + 
+					"ON ers.employees.emp_id = ers.reimbursements.resolved_by_id\r\n" + 
+					"WHERE ers.reimbursements.resolved_by_id IS NOT NULL;";
+
+			List<Employee> employeesList = new ArrayList<Employee>();
+
+			try (Connection conn = ERSConnectionUtil.getConnection()) {
+				statement = conn.prepareStatement(query);
+				results = statement.executeQuery();
+
+				while (results.next()) {
+					Employee empInfo = new Employee();
+					
+					empInfo.setEmpId(results.getInt("emp_id"));
+//					empInfo.setEmail(results.getString("email"));
+//					empInfo.setEmpPwd(results.getString("pwd"));
+					empInfo.setFirstName(results.getString("first_name"));
+					empInfo.setLastName(results.getString("last_name"));
+//					empInfo.setPhoneNumber(results.getLong("phone_number"));
+//					empInfo.setManager(results.getBoolean("manager"));
+					
+					employeesList.add(empInfo);
+
+					//employeesList.add(createEmployeeFromRS(results));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				ERSStreamCloser.close(results);
+				ERSStreamCloser.close(statement);
+				System.out.println("Close stream");
+
+			}
+			return employeesList;
+		}
 
 }
