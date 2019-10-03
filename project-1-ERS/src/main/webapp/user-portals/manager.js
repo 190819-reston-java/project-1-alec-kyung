@@ -101,3 +101,35 @@ let createPRLi = (pendingReimbs) => {
 
     viewPRLi.append(PRLi);
 };
+
+//View Resolved
+const VIEW_RESOLVED_URL = "/project-1-ERS/manager/view-resolved-reimbs";
+let managerViewResolvedButton = document.getElementById("get-resolved-reimbs");
+let viewRRLi = document.getElementById("resolvedReimbsList");
+managerViewResolvedButton.addEventListener("click", (event) => {
+    console.log("resolved reimbs clicked")
+    fetch(VIEW_RESOLVED_URL, { method: "GET" })
+        .then((response) => {
+            // console.log(response.json());
+            return response.json();
+        })
+        .then((resolvedReimbsJson) => {
+            clearDisplay();
+            for (let resolvedReimbs in resolvedReimbsJson) {
+                console.log("RR JSON: " + resolvedReimbsJson);
+
+                console.log("RR: " + resolvedReimbsJson[resolvedReimbs]);
+
+                createPRLi(resolvedReimbsJson[resolvedReimbs]);
+            }
+        })
+        .catch(console.log);
+});
+
+
+let createRRLi = (resolvedReimbs) => {
+    let RRLi = document.createElement("li");
+    RRLi.innerText = `REIMBURSEMENT ID: ${resolvedReimbs.reimbId} | AMOUNT: ${resolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${resolvedReimbs.reimbStatus} | SUBMITTED BY: ${resolvedReimbs.submittedBy} | RESOLVED BY: ${resolvedReimbs.resolvedBy} | SUBMIT TIME: ${resolvedReimbs.submitTime}`;
+
+    viewRRLi.append(RRLi);
+};
