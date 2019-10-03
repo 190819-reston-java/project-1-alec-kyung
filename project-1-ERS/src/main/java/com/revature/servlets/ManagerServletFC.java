@@ -18,9 +18,9 @@ import com.revature.repositories.ReimbDao;
 import com.revature.repositories.ReimbDaoImpl;
 import com.revature.services.EmployeeService;
 
-public class ManagerServlet extends HttpServlet {
+public class ManagerServletFC extends HttpServlet {
 	
-	private static Logger managerServletLogger = Logger.getLogger(ManagerServlet.class);
+	private static Logger managerServletLogger = Logger.getLogger(ManagerServletFC.class);
 	
 	private ReimbDao dbReimbs = new ReimbDaoImpl();
 	private ObjectMapper om = new ObjectMapper();
@@ -43,14 +43,17 @@ public class ManagerServlet extends HttpServlet {
 			break;
 		case "select-reimb":
 			selectReimbByEmployeeId(req, resp, tokens);
+			break;
 		case "view-all-pending-reimbs":
 			viewAllPendingReimbs(req, resp, tokens);
+			break;
+		case "view-resolved-reimbs":
+			viewResolvedReimbs(req, resp, tokens);
 			break;
 		}
 		
 	}
 	
-
 
 	private void getEmployees(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException, ServletException {
 //		ObjectMapper om = new ObjectMapper();
@@ -73,18 +76,16 @@ public class ManagerServlet extends HttpServlet {
 	}
 	
 	private void selectReimbByEmployeeId(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
-		String managerInputEmployeeID = req.getParameter("viewRequestEmpId");
-		int selectReimb = Integer.valueOf(managerInputEmployeeID);
+		int managerInputEmployeeID = Integer.parseInt(req.getParameter("viewRequestEmpId"));
 		
-		managerServletLogger.debug(selectReimb);
+		managerServletLogger.debug(managerInputEmployeeID);
 		Employee employee = new Employee();
 		
-		int reimbByEmployee = employee.getEmpId(selectReimb);
 		
 		PrintWriter pw = resp.getWriter();
 
 		if(req.getMethod().equals("GET")) {
-			String jsonReimbByEmployeeId = om.writeValueAsString(reimbByEmployee);
+			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(managerInputEmployeeID));
 			
 			managerServletLogger.info(jsonReimbByEmployeeId);
 			
@@ -116,5 +117,27 @@ public class ManagerServlet extends HttpServlet {
 		}
 	}
 
+
+	private void viewResolvedReimbs(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
+		ObjectMapper om = new ObjectMapper();
+		PrintWriter pw = resp.getWriter();
+//		ReimbDao dbReimbs = new ReimbDaoImpl();
+		
+		
+		if(req.getMethod().equals("GET")) {
+			
+			
+			managerServletLogger.info("GET from JS running");
+			if (tokens.length == 1) {
+				String jsonEmployees = om.writeValueAsString(dbReimbs.getResolvedReimMan());
+				
+				managerServletLogger.info(jsonEmployees);
+				
+				pw.write(jsonEmployees);
+			} else {
+//				String jsonEmployee = om.writeValueAsString(db.getEmployeeInfo(tokens[1]));
+			}
+		}
+	}
 
 }
