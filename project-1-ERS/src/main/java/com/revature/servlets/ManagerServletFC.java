@@ -129,7 +129,7 @@ public class ManagerServletFC extends HttpServlet {
 			
 			managerServletLogger.info("GET from JS running");
 			if (tokens.length == 1) {
-				String jsonEmployees = om.writeValueAsString(dbReimbs.getResolvedReimMan());
+				String jsonEmployees = om.writeValueAsString(dbReimbs);
 				
 				managerServletLogger.info(jsonEmployees);
 				

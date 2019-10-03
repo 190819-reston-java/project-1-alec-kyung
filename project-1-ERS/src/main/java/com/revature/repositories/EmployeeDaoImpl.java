@@ -253,11 +253,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			PreparedStatement statement = null;
 			ResultSet results = null;
 
-			String query = "SELECT emp_id, first_name, last_name\r\n" + 
-					"FROM ers.employees\r\n" + 
-					"FULL JOIN ers.reimbursements\r\n" + 
-					"ON ers.employees.emp_id = ers.reimbursements.resolved_by_id\r\n" + 
-					"WHERE ers.reimbursements.resolved_by_id IS NOT NULL;";
+//			String query = "SELECT emp_id, first_name, last_name\r\n" + 
+//					"FROM ers.employees\r\n" + 
+//					"FULL JOIN ers.reimbursements\r\n" + 
+//					"ON ers.employees.emp_id = ers.reimbursements.resolved_by_id\r\n" + 
+//					"WHERE ers.reimbursements.resolved_by_id IS NOT NULL;";
+			
+//			String query = "SELECT * FROM ers.reimbursements WHERE resolved_by_id IS NOT NULL;";
+//			
+			String query = "SELECT *\r\n" + 
+			"FROM ers.employees\r\n" + 
+			"FULL JOIN ers.reimbursements\r\n" + 
+			"ON ers.employees.emp_id = ers.reimbursements.resolved_by_id\r\n" + 
+			"WHERE ers.reimbursements.resolved_by_id IS NOT NULL;";
 
 			List<Employee> employeesList = new ArrayList<Employee>();
 

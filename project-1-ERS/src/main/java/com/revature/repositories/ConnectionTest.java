@@ -13,15 +13,16 @@ public class ConnectionTest {
 	public static void main(String[] args) {
 		//ERSConnectionUtil.getConnection();
 		
-		HttpServletRequest req = null;
+		
+		EmployeeDao emps = new EmployeeDaoImpl();
 		ReimbDao reimbs = new ReimbDaoImpl();
 		ReimbService reimbsService = new ReimbService();
+		EmployeeService employee = new EmployeeService();
+
 		
 //		Cookie cookies[] = req.getCookies();
 		String user = null;
-		EmployeeService employee = new EmployeeService();
 		
-		EmployeeDao emps = new EmployeeDaoImpl();
 		
 		for (Employee e : emps.getEmployees()) {
 			System.out.println(e);
@@ -49,7 +50,8 @@ public class ConnectionTest {
 //			System.out.println();
 //		}
 		
-		System.out.println(employee.getResolvedReimMan());
+		System.out.println("VIEW ALL RESOLVE: " + employee.getResolvedReimMan());
+		
 
 //		
 		
