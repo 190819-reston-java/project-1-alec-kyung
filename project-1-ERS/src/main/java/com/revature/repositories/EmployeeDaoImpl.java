@@ -191,17 +191,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 
 	@Override
-	public Employee isManager() {
+	public Employee isManager(int empId) {
 		Employee user = null;
 
 		PreparedStatement statement = null;
 		ResultSet results = null;
 
-		String query = "SELECT * FROM ers.employees WHERE manager=?";
+		String query = "SELECT manager\r\n" + 
+				"FROM ers.employees\r\n" + 
+				"WHERE emp_id =?;";
 		
 		try (Connection conn = ERSConnectionUtil.getConnection()){
 			statement = conn.prepareStatement(query);
-			statement.setBoolean(1, true);
+			statement.setInt(1, empId);
 			if (statement.execute()) {
 				results = statement.getResultSet();
 				if (results.next()) {
