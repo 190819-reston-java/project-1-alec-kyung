@@ -35,6 +35,9 @@ public class LoginServlet extends HttpServlet {
 		Employee employeeUser = dbUser.getLoginCredentials(email, password);
 		
 		if (employeeUser != null) {
+//			if (dbUser.getManager()) {
+//				resp.sendRedirect("user-portals/manager_page.html");
+//			}
 			
 			//COOKIES WAY
 //			String empFirstName = employeeUser.getFirstName();
@@ -48,9 +51,12 @@ public class LoginServlet extends HttpServlet {
 			//SESSION WAY
 			HttpSession session = req.getSession();
 			session.setAttribute("employeeSession", employeeUser);
+			
+			
 			loginServletLogger.info("Session set in LoginServlet");
 
-			
+			loginServletLogger.info("Session set in LoginServlet" + employeeUser);
+
 //			loginServletLogger.info("Redirect to AuthorizeServlet");
 //			resp.sendRedirect("authorize");
 			
