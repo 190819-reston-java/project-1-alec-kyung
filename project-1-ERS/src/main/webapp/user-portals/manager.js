@@ -107,7 +107,7 @@ const VIEW_RESOLVED_URL = "/project-1-ERS/manager/view-resolved-reimbs";
 let managerViewResolvedButton = document.getElementById("get-resolved-reimbs");
 let viewRRLi = document.getElementById("resolvedReimbsList");
 managerViewResolvedButton.addEventListener("click", (event) => {
-    //console.log("resolved reimbs clicked");
+    console.log("resolved reimbs clicked");
     // createRRLi();
     fetch(VIEW_RESOLVED_URL, { method: "GET" })
         .then((response) => {
