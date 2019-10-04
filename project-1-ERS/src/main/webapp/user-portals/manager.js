@@ -131,7 +131,6 @@ managerViewResolvedButton.addEventListener("click", (event) => {
 let createRRLi = (resolvedReimbs) => {
     let RRLi = document.createElement("li");
     RRLi.innerText = `REIMBURSEMENT ID: ${resolvedReimbs.reimbId} | AMOUNT: ${resolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${resolvedReimbs.reimbStatus} | SUBMITTED BY: ${resolvedReimbs.submittedBy} | RESOLVED BY: ${resolvedReimbs.resolvedBy}`;
-    // RRLi.innerText = "TEST TEXT RESOLVED REIMBURSEMENTS";
     viewRRLi.append(RRLi);
 };
 

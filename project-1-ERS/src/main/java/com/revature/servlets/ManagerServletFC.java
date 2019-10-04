@@ -70,6 +70,7 @@ public class ManagerServletFC extends HttpServlet {
 
 		if (req.getMethod().equals("GET")) {
 			HttpSession session = req.getSession();
+			session.getAttribute("employeeSession");
 			session.invalidate();
 		}
 	}

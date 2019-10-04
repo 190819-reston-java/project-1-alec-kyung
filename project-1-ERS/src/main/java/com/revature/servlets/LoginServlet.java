@@ -38,8 +38,8 @@ public class LoginServlet extends HttpServlet {
 			if (dbUser.getEmployeeInfo(email).getManager()) {
 				//SESSION WAY
 				HttpSession session = req.getSession();
-				session.setAttribute("employeeSession", employeeUser);
-				loginServletLogger.debug("Session set in LoginServlet" + employeeUser);	
+				session.setAttribute("managerSession", employeeUser);
+				loginServletLogger.debug("Manager session set in LoginServlet" + employeeUser);	
 				loginServletLogger.info("Redirect to Manager page");
 
 				resp.sendRedirect("user-portals/manager_page.html");

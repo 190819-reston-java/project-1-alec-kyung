@@ -140,6 +140,7 @@ public class EmployeeServletFC extends HttpServlet {
 		System.out.println("Logout reached");
 		if (req.getMethod().equals("GET")) {
 			HttpSession session = req.getSession();
+			session.getAttribute("employeeSession");
 			session.invalidate();
 		}
 	}
