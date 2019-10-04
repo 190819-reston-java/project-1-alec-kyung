@@ -71,24 +71,25 @@
                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="employeeInfoModal">Update Infomration</h5>
+                                                <h5 class="modal-title" id="employeeInfoModal">Update Information</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <form>
-                                                        <input type="name" id="update-first-name" placeholder="First Name">
-                                                        <input type="name" id="update-last-name" placeholder="Last Name">
-                                                        <input type="phone" id="update-phone" placeholder="Phone Number">
-                                                        <input type="email" id="update-email" placeholder="Email">
-                                                        <input type="password" id="update-password" placeholder="Password">
+                                                    <form id="update-info">
+                                                        <input type="name" id="update-first-name" name="firstName" placeholder="First Name">
+                                                        <input type="name" id="update-last-name" name="lastName" placeholder="Last Name">
+                                                        <input type="phone" id="update-phone" name="phoneNumber" placeholder="Phone Number">
+                                                        <input type="email" id="update-email" name="email" placeholder="Email">
+                                                        <input type="password" id="update-password" name="password" placeholder="Password">
+                                                        <input type="submit">
                                                     </form>
                                                 </div>
 
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" value="submit" id="update-info" class="btn btn-primary">Save changes</button>
+                                                <!-- <button type="button" value="submit" id="update-info" class="btn btn-primary">Save changes</button> -->
                                             </div>
                                         </div>
                                     </div>
@@ -108,16 +109,16 @@
                         </div>
                         <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
-                                <div class="form-group">
-                                    <form>
+                                <form id="submit-reimb" action="/project-1-ERS/employee/submitReimb" method="GET">
+                                    <div class="form-group">
                                         <label for="reimb-amt">Enter Reimbursement Amount:</label><br>
-                                        <input type="number" id="reimb-amt"><br>
+                                        <input type="number" name="request-amount" id="reimb-amt"><br>
                                         <br>
                                         <label for="receipt-upload">Insert Receipt Image:</label><br>
                                         <input type="file" class="form-control-file" id="receipt-upload"><br>
                                         <input type="submit">
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
 
                             </div>
                         </div>
@@ -186,9 +187,9 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         </div>
                                         <div class="modal-body">
-                                        <ul id="resolved-requests">
+                                            <ul id="resolved-requests">
 
-                                        </ul>
+                                            </ul>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

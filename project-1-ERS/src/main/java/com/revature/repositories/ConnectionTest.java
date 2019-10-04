@@ -50,13 +50,17 @@ public class ConnectionTest {
 //			System.out.println();
 //		}
 		
-		System.out.println("VIEW ALL RESOLVE: " + employee.getResolvedReimMan());
+		System.out.println("VIEW ALL RESOLVE: " + reimbs.getAllResolvedReimbursementsAsManager());
+		
+		System.out.println("VIEW ALL RESOLVE: " + reimbs.getAllPendingReimbursementsAsManager());
+
 		
 
 //		
 		
 		
-		System.out.println("REIMBS BY ID: " + reimbs.getReimbsById(2));
+		System.out.println("PENDING REIMBS BY ID: " + reimbs.getPendingReimbursementsAsEmployee(2));
+		System.out.println("APPROVED REIMBS BY ID: " + reimbs.getResolvedReimbursementsAsEmployee(2));
 //		
 //		System.out.println("RESOLVED REIMBS: " + reimbs.getResolvedReimMan());
 

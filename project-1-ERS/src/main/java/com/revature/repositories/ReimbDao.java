@@ -15,12 +15,22 @@ public interface ReimbDao {
 	boolean addReimb(Reimbursements reimb);
 	boolean resolve(Reimbursements reimb);
 	
+	
 	ArrayList<Reimbursements> getResolvedReimEmp(int empId);
 	
 	
 	//not yet used, but i dont think we need these?????
 	boolean updateReimb (int id, int resolver, int status);
 	boolean deleteReimb(int id);
+	public boolean submitReimb(double amt, int empId);
+	
+	
+	//My code after attempts everything comes back null
+	ArrayList<Reimbursements> getAllResolvedReimbursementsAsManager();
+	ArrayList<Reimbursements> getAllPendingReimbursementsAsManager();
+	
+	ArrayList<Reimbursements> getResolvedReimbursementsAsEmployee(int empId);
+	ArrayList<Reimbursements> getPendingReimbursementsAsEmployee(int empId);
 	
 	
 	

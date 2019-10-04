@@ -29,5 +29,9 @@ public class EmployeeService {
 	public List<Employee> getResolvedReimMan() {
 	return  employeeDao.getResolvedReimMan();
 	}
+	
+	public boolean updateEmployee(Employee eu) {
+		return employeeDao.updateAccount(eu);
+	}
 
 }

@@ -28,6 +28,7 @@ public class Employee {
 		super();
 	}
 
+
 	public int getEmpId() {
 		return empId;
 	}

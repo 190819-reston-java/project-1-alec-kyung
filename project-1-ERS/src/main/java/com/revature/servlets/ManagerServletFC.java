@@ -52,6 +52,8 @@ public class ManagerServletFC extends HttpServlet {
 		case "view-resolved-reimbs":
 			viewResolvedReimbs(req, resp, tokens);
 			break;
+		case "logout":
+			break;
 		}
 		
 	}
@@ -77,27 +79,23 @@ public class ManagerServletFC extends HttpServlet {
 		}
 	}
 	
-	private void selectReimbByEmployeeId(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
-		System.out.println("GET HERE");
-		
-		
-		String emp = req.getParameter("viewRequestEmpId");
-		System.out.println(emp);
-//		int managerInputEmployeeID = Integer.parseInt(req.getParameter("viewRequestEmpId"));
-		
-//		managerServletLogger.debug(managerInputEmployeeID);
-		Employee employee = new Employee();
-		
+	private void selectReimbByEmployeeId(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {		
 		
 		PrintWriter pw = resp.getWriter();
 
 		if(req.getMethod().equals("GET")) {
-//			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(emp));
+			String emp = req.getParameter("viewRequestEmpId");
+			managerServletLogger.debug("Input of Employee ID from Manager: " + emp);
+//			int managerInputEmployeeID = Integer.parseInt(req.getParameter("viewRequestEmpId"));
+			int managerInputEmployeeID = Integer.parseInt(emp);
+//			managerServletLogger.debug(managerInputEmployeeID);
+//			Employee employee = new Employee();
+			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(managerInputEmployeeID));
 			
-//			managerServletLogger.info(jsonReimbByEmployeeId);
-//			
-//			
-//			pw.write(jsonReimbByEmployeeId);
+			managerServletLogger.info(jsonReimbByEmployeeId);
+			
+			
+			pw.write(jsonReimbByEmployeeId);
 		}
 		
 	}
@@ -113,7 +111,7 @@ public class ManagerServletFC extends HttpServlet {
 			
 			managerServletLogger.info("GET from JS running");
 			if (tokens.length == 1) {
-				String jsonEmployees = om.writeValueAsString(dbReimbs.getAllPendingReimMan());
+				String jsonEmployees = om.writeValueAsString(dbReimbs.getAllPendingReimbursementsAsManager());
 				
 				managerServletLogger.info(jsonEmployees);
 				
@@ -129,16 +127,15 @@ public class ManagerServletFC extends HttpServlet {
 		PrintWriter pw = resp.getWriter();
 //		ReimbDao dbReimbs = new ReimbDaoImpl();
 		
-		EmployeeDao dbManager = new EmployeeDaoImpl();
 		if(req.getMethod().equals("GET")) {
 			
 			managerServletLogger.info("GET from JS running");
 			if (tokens.length == 1) {
-				String jsonEmployees = om.writeValueAsString(dbManager.getResolvedReimMan());
+				String jsonResolved = om.writeValueAsString(dbReimbs.getAllResolvedReimbursementsAsManager());
 				
-				managerServletLogger.debug(jsonEmployees);
+				managerServletLogger.debug(jsonResolved);
 				
-				pw.write(jsonEmployees);
+				pw.write(jsonResolved);
 			} 
 		}
 	}
