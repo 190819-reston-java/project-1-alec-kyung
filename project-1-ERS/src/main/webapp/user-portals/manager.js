@@ -94,7 +94,6 @@ managerViewAllPendingButton.addEventListener("click", (event) => {
         .catch(console.log);
 });
 
-
 let createPRLi = (pendingReimbs) => {
     let PRLi = document.createElement("li");
     PRLi.innerText = `REIMBURSEMENT ID: ${pendingReimbs.reimbId} | AMOUNT: ${pendingReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${pendingReimbs.reimbStatus} | SUBMITTED BY: ${pendingReimbs.submittedBy} | RESOLVED BY: ${pendingReimbs.resolvedBy}`;
@@ -121,7 +120,7 @@ managerViewResolvedButton.addEventListener("click", (event) => {
 
                 console.log("RR: " + resolvedReimbsJson[resolvedReimbs]);
 
-                createPRLi(resolvedReimbsJson[resolvedReimbs]);
+                createRRLi(resolvedReimbsJson[resolvedReimbs]);
             }
         })
         .catch(console.log);
@@ -130,7 +129,7 @@ managerViewResolvedButton.addEventListener("click", (event) => {
 // resolvedReimbs will be added to create
 let createRRLi = (resolvedReimbs) => {
     let RRLi = document.createElement("li");
-    RRLi.innerText = `REIMBURSEMENT ID: ${resolvedReimbs.reimbId} | AMOUNT: ${resolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${resolvedReimbs.reimbStatus} | SUBMITTED BY: ${resolvedReimbs.submittedBy} | RESOLVED BY: ${resolvedReimbs.resolvedBy} | SUBMIT TIME: ${resolvedReimbs.submitTime}`;
+    RRLi.innerText = `REIMBURSEMENT ID: ${resolvedReimbs.reimbId} | AMOUNT: ${resolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${resolvedReimbs.reimbStatus} | SUBMITTED BY: ${resolvedReimbs.submittedBy} | RESOLVED BY: ${resolvedReimbs.resolvedBy}`;
     // RRLi.innerText = "TEST TEXT RESOLVED REIMBURSEMENTS";
     viewRRLi.append(RRLi);
 };

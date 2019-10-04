@@ -54,9 +54,19 @@ public class EmployeeServletFC extends HttpServlet {
 			getPendingReimbsViaEmp(req, resp, tokens);
 			break;
 		case "resolvedReimbs":
+			getResolvedReimbsViaEmp(req, resp, tokens);
+			break;
+		case "logout":
+			logout(req, resp);
 			break;
 		}
 
+	}
+
+
+	private void logout(HttpServletRequest req, HttpServletResponse resp) {
+		HttpSession session = req.getSession();
+		session.invalidate();
 	}
 
 	private void getEmployeeInfo(HttpServletRequest req, HttpServletResponse resp, String[] tokens)
@@ -141,11 +151,42 @@ public class EmployeeServletFC extends HttpServlet {
 				int employeeId = employee.getEmpId();
 				employeeServletLogger.debug("EMPLOYEE ID FROM SESSION: " + employeeId);
 
-				String jsonPendingReimbs = om.writeValueAsString(reimbDB.getReimbsById(employeeId));
+				String jsonPendingReimbs = om.writeValueAsString(reimbDB.getPendingReimbursementsAsEmployee(employeeId));
 
 				employeeServletLogger.info("Pending Reimbursements JSON: " + jsonPendingReimbs);
 
 				pw.write(jsonPendingReimbs);
+
+			}
+		}
+	}
+	
+
+	private void getResolvedReimbsViaEmp(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
+		employeeServletLogger.info("Reached getPendingReimbsViaEmp in Employee Servlet");
+		PrintWriter pw = resp.getWriter();
+
+		if (req.getMethod().equals("GET")) {
+
+			System.out.println(tokens.length);
+
+			if (tokens.length == 1) {
+
+				// SESSION WAY
+				HttpSession session = req.getSession();
+				Object employeeInfo = session.getAttribute("employeeSession");
+				employeeServletLogger.debug("Employee Session Received: " + employeeInfo);
+
+				// Gets employee ID from session
+				Employee employee = (Employee) employeeInfo;
+				int employeeId = employee.getEmpId();
+				employeeServletLogger.debug("EMPLOYEE ID FROM SESSION: " + employeeId);
+
+				String jsonResolvedReimbs = om.writeValueAsString(reimbDB.getResolvedReimbursementsAsEmployee(employeeId));
+
+				employeeServletLogger.info("Resolved Reimbursements JSON: " + jsonResolvedReimbs);
+
+				pw.write(jsonResolvedReimbs);
 
 			}
 		}

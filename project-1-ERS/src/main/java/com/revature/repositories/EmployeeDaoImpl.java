@@ -283,11 +283,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			
 //			String query = "SELECT * FROM ers.reimbursements WHERE resolved_by_id IS NOT NULL;";
 //			
-			String query = "SELECT ers.employees.email, ers.employees.first_name, ers.employees.last_name, ers.reimbursements.amount, ers.reimbursements.status, ers.reimbursements.image_url\r\n" + 
-					"FROM ers.employees\r\n" + 
-					"FULL JOIN ers.reimbursements\r\n" + 
-					"ON ers.employees.emp_id = ers.reimbursements.submitted_by_id\r\n" + 
-					"WHERE ers.reimbursements.status = 'approved' OR ers.reimbursements.status = 'denied';";
+//			String query = "SELECT ers.employees.email, ers.employees.first_name, ers.employees.last_name, ers.reimbursements.amount, ers.reimbursements.status, ers.reimbursements.image_url\r\n" + 
+//					"FROM ers.employees\r\n" + 
+//					"FULL JOIN ers.reimbursements\r\n" + 
+//					"ON ers.employees.emp_id = ers.reimbursements.submitted_by_id\r\n" + 
+//					"WHERE ers.reimbursements.status = 'approved' OR ers.reimbursements.status = 'denied';";
+			
+			String query = "SELECT * FROM ers.reimbursements WHERE resolved_by_id IS NULL;";
 
 			List<Employee> employeesList = new ArrayList<Employee>();
 

@@ -108,6 +108,12 @@ FULL JOIN ers.reimbursements
 ON ers.employees.emp_id = ers.reimbursements.submitted_by_id
 WHERE ers.reimbursements.status = 'approved' OR ers.reimbursements.status = 'denied';
 
+SELECT ers.employees.email, ers.employees.first_name, ers.employees.last_name, ers.reimbursements.amount, ers.reimbursements.status, ers.reimbursements.image_url 
+FROM ers.employees 
+FULL JOIN ers.reimbursements
+ON ers.employees.emp_id = ers.reimbursements.submitted_by_id
+WHERE ers.reimbursements.status = 'approved' OR ers.reimbursements.status = 'denied';
+
 --A Manager can view all resolved requests from all employees and see which manager resolved it
 --NO SESSION REQUIRED
 SELECT emp_id, first_name, last_name

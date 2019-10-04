@@ -47,12 +47,17 @@ pendingButton.addEventListener("click", (event) => {
     // let email = getSingleEmployeeInfo.email.value;
     fetch(PENDING_URL, { method: "GET" })
         .then((response) => {
-            console.log(response);
+            //console.log(response);
             return response.json();
         })
-        .then((ePendingReimbs) => {
-            createPRLi(ePendingReimbs);
-            // clearDisplay();
+        .then((ePendingReimbsJson) => {
+            console.log("EPR JSON: " + ePendingReimbsJson)
+                // clearDisplay();
+            for (let ePendingReimbs in ePendingReimbsJson) {
+
+
+                createPRLi(ePendingReimbsJson[ePendingReimbs]);
+            }
         })
         .catch((error) => {
             console.error(error);
@@ -74,22 +79,24 @@ resolvedButton.addEventListener("click", (event) => {
     console.log("resolved button clicked");
 
     fetch(RESOLVED_URL, { method: "GET" })
-    .then((response) => {
-        //console.log(response);
-        return response.json();
-    })
-    .then((resolvedReimbs) => {
-            createPRLi(resolvedReimbs);
-            // clearDisplay();
+        .then((response) => {
+            //console.log(response);
+            return response.json();
+        })
+        .then((eResolvedReimbsJson) => {
+            //clearDisplay
+            for (let eResolvedReimbs in eResolvedReimbsJson) {
+                createRRLi(eResolvedReimbsJson[eResolvedReimbs]);
+            }
         })
         .catch((error) => {
             console.error(error);
         });
-        
+
 });
-let createRRLi = (ePendingReimbs) => {
+let createRRLi = (eResolvedReimbs) => {
     let RRLi = document.createElement("li");
-    RRLi.innerText = `REIMBURSEMENT ID: ${resolvedReimbs.reimbId} | AMOUNT: ${resolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${resolvedReimbs.reimbStatus} | SUBMITTED BY: ${resolvedReimbs.submittedBy} | RESOLVED BY: ${resolvedReimbs.resolvedBy}`;
+    RRLi.innerText = `REIMBURSEMENT ID: ${eResolvedReimbs.reimbId} | AMOUNT: ${eResolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${eResolvedReimbs.reimbStatus} | SUBMITTED BY: ${eResolvedReimbs.submittedBy} | RESOLVED BY: ${eResolvedReimbs.resolvedBy}`;
 
     viewRRLi.append(RRLi);
 };
