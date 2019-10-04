@@ -14,6 +14,8 @@ import org.apache.log4j.Logger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.model.Employee;
+import com.revature.repositories.EmployeeDao;
+import com.revature.repositories.EmployeeDaoImpl;
 import com.revature.repositories.ReimbDao;
 import com.revature.repositories.ReimbDaoImpl;
 import com.revature.services.EmployeeService;
@@ -116,32 +118,28 @@ public class ManagerServletFC extends HttpServlet {
 				managerServletLogger.info(jsonEmployees);
 				
 				pw.write(jsonEmployees);
-			} else {
-//				String jsonEmployee = om.writeValueAsString(db.getEmployeeInfo(tokens[1]));
-			}
+			} 
 		}
 	}
 
 
 	private void viewResolvedReimbs(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
+		managerServletLogger.info("Reached Resolved Reimbursements for Manager");
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
 //		ReimbDao dbReimbs = new ReimbDaoImpl();
 		
-		
+		EmployeeDao dbManager = new EmployeeDaoImpl();
 		if(req.getMethod().equals("GET")) {
-			
 			
 			managerServletLogger.info("GET from JS running");
 			if (tokens.length == 1) {
-				String jsonEmployees = om.writeValueAsString(dbReimbs);
+				String jsonEmployees = om.writeValueAsString(dbManager.getResolvedReimMan());
 				
-				managerServletLogger.info(jsonEmployees);
+				managerServletLogger.debug(jsonEmployees);
 				
 				pw.write(jsonEmployees);
-			} else {
-//				String jsonEmployee = om.writeValueAsString(db.getEmployeeInfo(tokens[1]));
-			}
+			} 
 		}
 	}
 
