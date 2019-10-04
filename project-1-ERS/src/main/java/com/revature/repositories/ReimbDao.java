@@ -15,6 +15,8 @@ public interface ReimbDao {
 	boolean addReimb(Reimbursements reimb);
 	boolean resolve(Reimbursements reimb);
 	
+	ArrayList<Reimbursements> getResolvedReimEmp(int empId);
+	
 	
 	//not yet used, but i dont think we need these?????
 	boolean updateReimb (int id, int resolver, int status);
