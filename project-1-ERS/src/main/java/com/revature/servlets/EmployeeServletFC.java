@@ -87,7 +87,7 @@ public class EmployeeServletFC extends HttpServlet {
 		resp.setContentType("text/html;charset=UTF-8");
 
 		//NEED TO WORK ON REDIRECTING BACK TO MAIN PAGE
-		resp.sendRedirect("viewInfo");
+//		resp.sendRedirect(requestAmt);
 	
 				
 		
