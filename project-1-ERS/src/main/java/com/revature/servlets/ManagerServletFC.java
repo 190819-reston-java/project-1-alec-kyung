@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -46,6 +47,9 @@ public class ManagerServletFC extends HttpServlet {
 		case "select-reimb":
 			selectReimbByEmployeeId(req, resp, tokens);
 			break;
+		case "approve-deny":
+			approveReimbs(req, resp, tokens);
+			break;
 		case "view-all-pending-reimbs":
 			viewAllPendingReimbs(req, resp, tokens);
 			break;
@@ -53,11 +57,24 @@ public class ManagerServletFC extends HttpServlet {
 			viewResolvedReimbs(req, resp, tokens);
 			break;
 		case "logout":
+			logout(req, resp);
 			break;
 		}
 		
 	}
 	
+
+
+	private void logout(HttpServletRequest req, HttpServletResponse resp) {
+		System.out.println("Logout reached");
+
+		if (req.getMethod().equals("GET")) {
+			HttpSession session = req.getSession();
+			session.invalidate();
+		}
+	}
+
+
 
 	private void getEmployees(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException, ServletException {
 //		ObjectMapper om = new ObjectMapper();
@@ -84,13 +101,13 @@ public class ManagerServletFC extends HttpServlet {
 		PrintWriter pw = resp.getWriter();
 
 		if(req.getMethod().equals("GET")) {
-			String emp = req.getParameter("viewRequestEmpId");
+			int emp = Integer.parseInt(req.getParameter("viewRequestEmpId"));
 			managerServletLogger.debug("Input of Employee ID from Manager: " + emp);
 //			int managerInputEmployeeID = Integer.parseInt(req.getParameter("viewRequestEmpId"));
-			int managerInputEmployeeID = Integer.parseInt(emp);
+//			int managerInputEmployeeID = Integer.parseInt(emp);
 //			managerServletLogger.debug(managerInputEmployeeID);
 //			Employee employee = new Employee();
-			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(managerInputEmployeeID));
+			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(emp));
 			
 			managerServletLogger.info(jsonReimbByEmployeeId);
 			
@@ -100,6 +117,29 @@ public class ManagerServletFC extends HttpServlet {
 		
 	}
 	
+
+	private void approveReimbs(HttpServletRequest req, HttpServletResponse resp, String[] tokens) {
+		
+		if(req.getMethod().equals("POST")) {
+			
+		}
+		
+	}
+	
+//	if(submitType.equals("aprove_deny")) {
+//		String reinbursement_id = req.getParameter("id");
+//		String radio = req.getParameter("decide");
+//		int idInt = Integer.parseInt(reinbursement_id);
+//		if("Approved".equals(radio)) {
+//			ReimbursementDao reimbursementDao = new ReimbursementDaoJDBC();
+//			reimbursementDao.requestAccepted(idInt);
+//			req.getRequestDispatcher("approve_deny_reimbursements.html").forward(req, resp);
+//		}else {
+//			ReimbursementDao reimbursementDao = new ReimbursementDaoJDBC();
+//			reimbursementDao.requestDenied(idInt);
+//			req.getRequestDispatcher("approve_deny_reimbursements.html").forward(req, resp);
+//		}
+		
 	private void viewAllPendingReimbs(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();

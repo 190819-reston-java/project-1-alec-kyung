@@ -69,7 +69,7 @@ public class EmployeeServletFC extends HttpServlet {
 	private void submitReimb(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
-		
+
 		HttpSession session = req.getSession();
 		Object employeeInfo = session.getAttribute("employeeSession");
 		employeeServletLogger.debug("Employee Session Received: " + employeeInfo);
@@ -78,45 +78,42 @@ public class EmployeeServletFC extends HttpServlet {
 		Employee employee = (Employee) employeeInfo;
 		int employeeId = employee.getEmpId();
 		employeeServletLogger.debug("EMPLOYEE ID FROM SESSION: " + employeeId);
-		
+
 		String requestAmt = req.getParameter("request-amount");
 		employeeServletLogger.debug("EMPLOYEE REQUEST AMOUNT: " + requestAmt);
-		
+
 		reimbDB.submitReimb(Integer.parseInt(requestAmt), employeeId);
-		
+
 		resp.setContentType("text/html;charset=UTF-8");
 
-		//NEED TO WORK ON REDIRECTING BACK TO MAIN PAGE
-		resp.sendRedirect("viewInfo");
-	
-				
-		
-	}
-	
+		// NEED TO WORK ON REDIRECTING BACK TO MAIN PAGE
+//		resp.sendRedirect("viewInfo");
 
+	}
 
 	private void updateEmployee(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
 		Employee employee = null;
 		EmployeeService employeeService = new EmployeeService();
-		
-		if(req.getMethod().equals("PUT")) {
+
+		if (req.getMethod().equals("PUT")) {
 			employee = om.readValue(req.getReader(), Employee.class);
-			if(tokens.length > 1) {
+			if (tokens.length > 1) {
 				try {
-				employee.setEmpId(Integer.parseInt(tokens[1]));
+					employee.setEmpId(Integer.parseInt(tokens[1]));
 				} catch (NumberFormatException e) {
 					resp.sendError(400);
 				}
 			}
-			
-			if(!employeeService.updateEmployee(employee)) {
+
+			if (!employeeService.updateEmployee(employee)) {
 				resp.sendError(400, "Failed to update player");
 			}
 			pw.write("Successful update");
 
-		};
+		}
+		;
 
 		// SESSION WAY
 //		HttpSession session = req.getSession();
@@ -140,8 +137,11 @@ public class EmployeeServletFC extends HttpServlet {
 	}
 
 	private void logout(HttpServletRequest req, HttpServletResponse resp) {
-		HttpSession session = req.getSession();
-		session.invalidate();
+		System.out.println("Logout reached");
+		if (req.getMethod().equals("GET")) {
+			HttpSession session = req.getSession();
+			session.invalidate();
+		}
 	}
 
 	private void getEmployeeInfo(HttpServletRequest req, HttpServletResponse resp, String[] tokens)
