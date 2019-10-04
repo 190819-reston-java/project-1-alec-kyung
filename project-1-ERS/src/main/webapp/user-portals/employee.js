@@ -29,13 +29,20 @@ window.addEventListener("load", (event) => {
 
 let displayInfo = (employee) => {
     let employeeCardInfo = document.createElement("p");
-    employeeCardInfo.innerText = `EMPLOYEE ID: ${employee.empId} | EMPLOYEE NAME: ${employee.firstName} ${employee.lastName} | Email: ${employee.email} | Phone: ${employee.phoneNumber} | MANAGER: ${employee.manager}`;
+    employeeCardInfo.innerText = `EMPLOYEE ID: ${employee.empId} | EMPLOYEE NAME: ${employee.firstName} ${employee.lastName} | EMAIL: ${employee.email} | PHONE: ${employee.phoneNumber}`;
     // clearDisplay();
     infoCard.append(employeeCardInfo);
 }
 
 let updateButton = document.getElementById("get-employee-info");
 
+
+//SUBMIT REIMBURSEMENT
+// let submitForm = document.getElementById("submit-reimb");
+
+// submitForm.addEventListener("submit", (event) => {
+
+// })
 
 //VIEW PENDING REIMBURSEMENTS BY EMPLOYEE ID
 
@@ -66,7 +73,7 @@ pendingButton.addEventListener("click", (event) => {
 
 let createPRLi = (ePendingReimbs) => {
     let PRLi = document.createElement("li");
-    PRLi.innerText = `REIMBURSEMENT ID: ${ePendingReimbs.reimbId} | AMOUNT: ${ePendingReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${ePendingReimbs.reimbStatus} | SUBMITTED BY: ${ePendingReimbs.submittedBy} | RESOLVED BY: ${ePendingReimbs.resolvedBy}`;
+    PRLi.innerText = `REIMBURSEMENT ID: ${ePendingReimbs.reimbId} | AMOUNT: ${ePendingReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${ePendingReimbs.reimbStatus}`;
 
     viewPRLi.append(PRLi);
 };
@@ -96,23 +103,23 @@ resolvedButton.addEventListener("click", (event) => {
 });
 let createRRLi = (eResolvedReimbs) => {
     let RRLi = document.createElement("li");
-    RRLi.innerText = `REIMBURSEMENT ID: ${eResolvedReimbs.reimbId} | AMOUNT: ${eResolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${eResolvedReimbs.reimbStatus} | SUBMITTED BY: ${eResolvedReimbs.submittedBy} | RESOLVED BY: ${eResolvedReimbs.resolvedBy}`;
+    RRLi.innerText = `REIMBURSEMENT ID: ${eResolvedReimbs.reimbId} | AMOUNT: ${eResolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${eResolvedReimbs.reimbStatus} | RESOLVED BY: ${eResolvedReimbs.resolvedBy}`;
 
     viewRRLi.append(RRLi);
 };
 
 //UPDATE EMPOYEE
 const UPDATE_URL = "/project-1-ERS/employee/updateInfo";
-
 let updateEmployee = document.getElementById("update-info");
-updatePlayer.addEventListener("click", (event) => {
+
+updateEmployee.addEventListener("submit", (event) => {
     console.log("Update Button");
 
     event.preventDefault();
     fetch(UPDATE_URL, { method: "PUT", body: JSON.stringify(updateFromForm(updateEmployee)) })
         .then((response) => {
             if (response.status >= 200 && response.status < 300) {
-                alert("Player updated");
+                alert("Employee updated");
             } else {
                 alert("Failed to update");
             }
@@ -122,5 +129,10 @@ updatePlayer.addEventListener("click", (event) => {
 
 let updateFromForm = (form) => {
     let employee = {};
-
+    employee.firstName = form.firstName.value;
+    employee.lastName = form.lastName.value;
+    employee.phoneNumber = form.phoneNumber.value;
+    employee.email = form.email.value;
+    employee.password = form.password.value;
+    return employee;
 }

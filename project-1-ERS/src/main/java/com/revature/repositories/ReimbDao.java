@@ -22,6 +22,7 @@ public interface ReimbDao {
 	//not yet used, but i dont think we need these?????
 	boolean updateReimb (int id, int resolver, int status);
 	boolean deleteReimb(int id);
+	public boolean submitReimb(double amt, int empId);
 	
 	
 	//My code after attempts everything comes back null

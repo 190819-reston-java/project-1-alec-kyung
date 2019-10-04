@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
 			pw.println("Username or Password Incorrect");
 			resp.setContentType("text/html;charset=UTF-8");
 
-		
+			
 			resp.sendRedirect("index.html");
 		}
 	}

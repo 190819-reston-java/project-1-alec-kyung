@@ -41,8 +41,9 @@ let createLi = (employee) => {
 
 //SEARCH REIMBURSMENT
 const SEARCH_REIMB_URL = "/project-1-ERS/manager/select-reimb";
-let selectEmpReimbButton = document.getElementById("viewRequestEmpId");
-selectEmpReimbButton.addEventListener("submit", (event) => {
+let selectEmpReimbButton = document.getElementById("select-request");
+let searchResults = document.getElementById("selectEmployee");
+selectEmpReimbButton.addEventListener("click", (event) => {
     console.log("select reimbursement clicked");
     fetch(SEARCH_REIMB_URL, { method: "GET" })
         .then((response) => {
@@ -50,7 +51,7 @@ selectEmpReimbButton.addEventListener("submit", (event) => {
             return response.json();
         })
         .then((selectReimbsJson) => {
-            clearDisplay();
+            // clearDisplay();
             for (let selectReimbs in selectReimbsJson) {
                 console.log("PR JSON: " + selectReimbsJson);
 
@@ -62,12 +63,11 @@ selectEmpReimbButton.addEventListener("submit", (event) => {
         .catch(console.log);
 });
 
-
 let createSRLi = (selectReimbs) => {
     let SRLi = document.createElement("li");
     SRLi.innerText = `REIMBURSEMENT ID: ${selectReimbs.reimbId} | STATUS: ${selectReimbs.reimbAmt} ${selectReimbs.reimbStatus} | SUBMITTED BY: ${selectReimbs.submittedBy} | RESOLVED BY: ${selectReimbs.resolvedBy}`;
 
-    selectReimbsList.append(SRLi);
+    searchResults.append(SRLi);
 };
 
 //VIEW ALL PENDING REIMBURSMENTS (MANAGER)

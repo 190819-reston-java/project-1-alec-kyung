@@ -79,27 +79,23 @@ public class ManagerServletFC extends HttpServlet {
 		}
 	}
 	
-	private void selectReimbByEmployeeId(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
-		System.out.println("GET HERE");
-		
-		
-		String emp = req.getParameter("viewRequestEmpId");
-		System.out.println(emp);
-//		int managerInputEmployeeID = Integer.parseInt(req.getParameter("viewRequestEmpId"));
-		
-//		managerServletLogger.debug(managerInputEmployeeID);
-		Employee employee = new Employee();
-		
+	private void selectReimbByEmployeeId(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {		
 		
 		PrintWriter pw = resp.getWriter();
 
 		if(req.getMethod().equals("GET")) {
-//			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(emp));
+			String emp = req.getParameter("viewRequestEmpId");
+			managerServletLogger.debug("Input of Employee ID from Manager: " + emp);
+//			int managerInputEmployeeID = Integer.parseInt(req.getParameter("viewRequestEmpId"));
+			int managerInputEmployeeID = Integer.parseInt(emp);
+//			managerServletLogger.debug(managerInputEmployeeID);
+//			Employee employee = new Employee();
+			String jsonReimbByEmployeeId = om.writeValueAsString(dbReimbs.getReimbsById(managerInputEmployeeID));
 			
-//			managerServletLogger.info(jsonReimbByEmployeeId);
-//			
-//			
-//			pw.write(jsonReimbByEmployeeId);
+			managerServletLogger.info(jsonReimbByEmployeeId);
+			
+			
+			pw.write(jsonReimbByEmployeeId);
 		}
 		
 	}

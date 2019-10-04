@@ -238,6 +238,27 @@ public class ReimbDaoImpl implements ReimbDao {
 		}
 		return true;
 	}
+	
+	public boolean submitReimb(double amt, int empId) {
+		PreparedStatement statement = null;
+
+		String query = "INSERT INTO ers.reimbursements VALUES (DEFAULT, ?, DEFAULT, ?, NULL, NULL, DEFAULT);";
+
+		try (Connection conn = ERSConnectionUtil.getConnection()) {
+
+			statement = conn.prepareStatement(query);
+			statement.setDouble(1, amt);
+			statement.setInt(2, empId);
+
+			statement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			ERSStreamCloser.close(statement);
+		}
+		return true;
+	}
 
 	// double checckkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 	@Override

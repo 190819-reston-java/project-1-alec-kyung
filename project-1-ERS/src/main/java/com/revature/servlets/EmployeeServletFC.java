@@ -22,6 +22,7 @@ import com.revature.repositories.ReimbDao;
 import com.revature.repositories.ReimbDaoImpl;
 import com.revature.services.EmployeeService;
 import com.revature.services.ReimbService;
+import com.revature.services.UpdateInfo;
 
 public class EmployeeServletFC extends HttpServlet {
 
@@ -45,9 +46,11 @@ public class EmployeeServletFC extends HttpServlet {
 			break;
 		case "updateInfo":
 			employeeServletLogger.info("Entering update info");
+			updateEmployee(req, resp, tokens);
 			break;
 		case "submitReimb":
 			employeeServletLogger.info("Entering submit reimbursements");
+			submitReimb(req, resp, tokens);
 			break;
 		case "pendingReimbs":
 			employeeServletLogger.info("Entering pending reimbursements");
@@ -63,6 +66,78 @@ public class EmployeeServletFC extends HttpServlet {
 
 	}
 
+	private void submitReimb(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
+		ObjectMapper om = new ObjectMapper();
+		PrintWriter pw = resp.getWriter();
+		
+		HttpSession session = req.getSession();
+		Object employeeInfo = session.getAttribute("employeeSession");
+		employeeServletLogger.debug("Employee Session Received: " + employeeInfo);
+
+		// Gets employee ID from session
+		Employee employee = (Employee) employeeInfo;
+		int employeeId = employee.getEmpId();
+		employeeServletLogger.debug("EMPLOYEE ID FROM SESSION: " + employeeId);
+		
+		String requestAmt = req.getParameter("request-amount");
+		employeeServletLogger.debug("EMPLOYEE REQUEST AMOUNT: " + requestAmt);
+		
+		reimbDB.submitReimb(Integer.parseInt(requestAmt), employeeId);
+		
+		resp.setContentType("text/html;charset=UTF-8");
+
+		//NEED TO WORK ON REDIRECTING BACK TO MAIN PAGE
+		resp.sendRedirect("viewInfo");
+	
+				
+		
+	}
+	
+
+
+	private void updateEmployee(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
+		ObjectMapper om = new ObjectMapper();
+		PrintWriter pw = resp.getWriter();
+		Employee employee = null;
+		EmployeeService employeeService = new EmployeeService();
+		
+		if(req.getMethod().equals("PUT")) {
+			employee = om.readValue(req.getReader(), Employee.class);
+			if(tokens.length > 1) {
+				try {
+				employee.setEmpId(Integer.parseInt(tokens[1]));
+				} catch (NumberFormatException e) {
+					resp.sendError(400);
+				}
+			}
+			
+			if(!employeeService.updateEmployee(employee)) {
+				resp.sendError(400, "Failed to update player");
+			}
+			pw.write("Successful update");
+
+		};
+
+		// SESSION WAY
+//		HttpSession session = req.getSession();
+//		UpdateInfo update = om.readValue(req.getReader(), UpdateInfo.class);
+//		Employee oldEmployee = (Employee) session.getAttribute("employeeSession");
+//		employeeServletLogger.debug("Employee Session Received: " + oldEmployee);
+//	
+//		Employee newEmployee = new Employee(
+//				oldEmployee.getEmpId(),
+//				oldEmployee.getEmail(),
+//				oldEmployee.getEmpPwd(),
+//				update.getFirstName(),
+//				update.getLastName(),
+//				update.getEmail());
+//		
+//		if(employeeService.updateEmployee(newEmployee)) {
+//			session.setAttribute("employee", newEmployee);
+//		} else {
+//			resp.sendError(400, "Failed to create player");
+//		}
+	}
 
 	private void logout(HttpServletRequest req, HttpServletResponse resp) {
 		HttpSession session = req.getSession();
@@ -151,7 +226,8 @@ public class EmployeeServletFC extends HttpServlet {
 				int employeeId = employee.getEmpId();
 				employeeServletLogger.debug("EMPLOYEE ID FROM SESSION: " + employeeId);
 
-				String jsonPendingReimbs = om.writeValueAsString(reimbDB.getPendingReimbursementsAsEmployee(employeeId));
+				String jsonPendingReimbs = om
+						.writeValueAsString(reimbDB.getPendingReimbursementsAsEmployee(employeeId));
 
 				employeeServletLogger.info("Pending Reimbursements JSON: " + jsonPendingReimbs);
 
@@ -160,9 +236,9 @@ public class EmployeeServletFC extends HttpServlet {
 			}
 		}
 	}
-	
 
-	private void getResolvedReimbsViaEmp(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
+	private void getResolvedReimbsViaEmp(HttpServletRequest req, HttpServletResponse resp, String[] tokens)
+			throws IOException {
 		employeeServletLogger.info("Reached getPendingReimbsViaEmp in Employee Servlet");
 		PrintWriter pw = resp.getWriter();
 
@@ -182,7 +258,8 @@ public class EmployeeServletFC extends HttpServlet {
 				int employeeId = employee.getEmpId();
 				employeeServletLogger.debug("EMPLOYEE ID FROM SESSION: " + employeeId);
 
-				String jsonResolvedReimbs = om.writeValueAsString(reimbDB.getResolvedReimbursementsAsEmployee(employeeId));
+				String jsonResolvedReimbs = om
+						.writeValueAsString(reimbDB.getResolvedReimbursementsAsEmployee(employeeId));
 
 				employeeServletLogger.info("Resolved Reimbursements JSON: " + jsonResolvedReimbs);
 
