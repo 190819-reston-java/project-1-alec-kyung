@@ -39,9 +39,9 @@ let updateButton = document.getElementById("get-employee-info");
 
 //VIEW PENDING REIMBURSEMENTS BY EMPLOYEE ID
 
-let pendingButton = document.getElementById("select-request");
+let pendingButton = document.getElementById("get-pending-reimbs");
 let viewPRLi = document.getElementById("employee-pending-requests");
-pendingButton.addEventListener("submit", (event) => {
+pendingButton.addEventListener("click", (event) => {
     console.log("pending button clicked");
 
     // let email = getSingleEmployeeInfo.email.value;
@@ -61,23 +61,44 @@ pendingButton.addEventListener("submit", (event) => {
 
 let createPRLi = (ePendingReimbs) => {
     let PRLi = document.createElement("li");
-    PRLi.innerText = `REIMBURSEMENT ID: ${ePendingReimbs.reimbId} | AMOUNT: ${ePendingReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${ePendingReimbs.reimbStatus} | SUBMITTED BY: ${ePendingReimbs.submittedBy} | RESOLVED BY: ${ePendingReimbs.resolvedBy} | SUBMIT TIME: ${ePendingReimbs.submitTime}`;
+    PRLi.innerText = `REIMBURSEMENT ID: ${ePendingReimbs.reimbId} | AMOUNT: ${ePendingReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${ePendingReimbs.reimbStatus} | SUBMITTED BY: ${ePendingReimbs.submittedBy} | RESOLVED BY: ${ePendingReimbs.resolvedBy}`;
 
     viewPRLi.append(PRLi);
 };
 
 //VIEW RESOLVED REIMBURSEMENTS BY EMPLOYEE ID
 let resolvedButton = document.getElementById("get-resolved-reimbs");
+let viewRRLi = document.getElementById("resolved-requests");
 
 resolvedButton.addEventListener("click", (event) => {
     console.log("resolved button clicked");
+
+    fetch(RESOLVED_URL, { method: "GET" })
+    .then((response) => {
+        //console.log(response);
+        return response.json();
+    })
+    .then((resolvedReimbs) => {
+            createPRLi(resolvedReimbs);
+            // clearDisplay();
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+        
 });
+let createRRLi = (ePendingReimbs) => {
+    let RRLi = document.createElement("li");
+    RRLi.innerText = `REIMBURSEMENT ID: ${resolvedReimbs.reimbId} | AMOUNT: ${resolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${resolvedReimbs.reimbStatus} | SUBMITTED BY: ${resolvedReimbs.submittedBy} | RESOLVED BY: ${resolvedReimbs.resolvedBy}`;
+
+    viewRRLi.append(RRLi);
+};
 
 //UPDATE EMPOYEE
 const UPDATE_URL = "/project-1-ERS/employee/updateInfo";
 
 let updateEmployee = document.getElementById("update-info");
-updatePlayer.addEventListener("submit", (event) => {
+updatePlayer.addEventListener("click", (event) => {
     console.log("Update Button");
 
     event.preventDefault();
