@@ -53,6 +53,8 @@ public class LoginServlet extends HttpServlet {
 				resp.sendRedirect("user-portals/employee_page.html");
 				
 			}
+			
+	
 				
 //			resp.sendRedirect("user-portals/employee_page.html");
 		} else {
