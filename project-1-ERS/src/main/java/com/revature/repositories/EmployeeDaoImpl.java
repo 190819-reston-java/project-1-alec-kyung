@@ -118,8 +118,30 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public boolean updateAccount(Employee eu) {
-		// TODO Auto-generated method stub
-		return false;
+		PreparedStatement statement = null;
+
+		String query = "UPDATE ers.employees\r\n" + 
+				"SET emp_id = ?, email = ?, pwd = ?, first_name = ?, last_name = ?, phone_number = ?;";
+
+		try (Connection conn = ERSConnectionUtil.getConnection()) {
+
+			statement = conn.prepareStatement(query);
+			statement.setString(1, eu.getEmail());
+			statement.setString(2, eu.getEmpPwd());
+			statement.setString(3, eu.getFirstName());
+			statement.setString(4, eu.getLastName());
+			statement.setLong(5, eu.getPhoneNumber());
+			statement.setBoolean(6, eu.getManager());
+
+			statement.execute();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			ERSStreamCloser.close(statement);
+		}
+		return true;
 	}
 
 	@Override
