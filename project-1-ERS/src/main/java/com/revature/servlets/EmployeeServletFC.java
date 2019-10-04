@@ -88,13 +88,9 @@ public class EmployeeServletFC extends HttpServlet {
 
 		//NEED TO WORK ON REDIRECTING BACK TO MAIN PAGE
 //		resp.sendRedirect(requestAmt);
-	
 				
-		
 	}
 	
-
-
 	private void updateEmployee(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
 		ObjectMapper om = new ObjectMapper();
 		PrintWriter pw = resp.getWriter();
