@@ -27,7 +27,7 @@ public class ReimbService {
 	}
 	
 	public List<Reimbursements> getPendingReimList() {
-		return reimDao.getPendingReim();
+		return reimDao.getAllPendingReimMan();
 	}
 
 	

@@ -68,11 +68,11 @@ public class ReimbDaoImpl implements ReimbDao {
 
 	//A Manager can view all pending requests from all employees
 	@Override
-	public ArrayList<Reimbursements> getPendingReim() {
+	public ArrayList<Reimbursements> getAllPendingReimMan() {
 		PreparedStatement statement = null;
 		ResultSet results = null;
 
-		String query = "SELECT * \r\n" + 
+		String query = "SELECT ers.employees.email, ers.employees.first_name, ers.employees.last_name, ers.reimbursements.amount, ers.reimbursements.status, ers.reimbursements.image_url\r\n" + 
 				"FROM ers.employees\r\n" + 
 				"FULL JOIN ers.reimbursements\r\n" + 
 				"ON ers.employees.emp_id = ers.reimbursements.submitted_by_id\r\n" + 
@@ -86,14 +86,14 @@ public class ReimbDaoImpl implements ReimbDao {
 
 			while (results.next()) {
 				Reimbursements reimbInfo = new Reimbursements();
+				Employee empInfo = new Employee();
 				
-				reimbInfo.setReimbId(results.getInt("reimb_id"));
+				empInfo.setEmail(results.getString("email"));
+				empInfo.setFirstName(results.getString("first_name"));
+				empInfo.setLastName(results.getString("last_name"));
 				reimbInfo.setReimbAmt(results.getDouble("amount"));
 				reimbInfo.setReimbStatus(results.getString("status"));
-				reimbInfo.setSubmittedBy(results.getInt("submitted_by_id"));
-				reimbInfo.setResolvedBy(results.getInt("resolved_by_id"));
 				reimbInfo.setImageUrl(results.getString("image_url"));
-				reimbInfo.setSubmitTime(results.getLong("submit_time"));
 				
 				reimbursementsList.add(reimbInfo);
 			}
@@ -232,17 +232,13 @@ public class ReimbDaoImpl implements ReimbDao {
 	public boolean addReimb(Reimbursements reimb) {
 		PreparedStatement statement = null;
 
-		String query = "INSERT INTO ers.reimbursements VALUES (DEFAULT, ?, ?, ?, ?, ?, ?);";
+		String query = "INSERT INTO ers.reimbursements VALUES (DEFAULT, ?, DEFAULT, ?, NULL, NULL, DEFAULT);";
 
 		try (Connection conn = ERSConnectionUtil.getConnection()) {
 
 			statement = conn.prepareStatement(query);
 			statement.setDouble(1, reimb.getReimbAmt());
-			statement.setString(2, reimb.getReimbStatus());
-			statement.setInt(3, reimb.getSubmittedBy());
-			statement.setInt(4, reimb.getResolvedBy());
-			statement.setString(5, reimb.getImageUrl());
-			statement.setLong(6, reimb.getSubmitTime());
+			statement.setInt(2, reimb.getSubmittedBy());
 
 			statement.execute();
 		} catch (SQLException e) {

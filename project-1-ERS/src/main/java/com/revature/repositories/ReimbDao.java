@@ -9,7 +9,7 @@ public interface ReimbDao {
 	ArrayList<Reimbursements> getAllReimbs();
 	ArrayList<Reimbursements> getReimbsById(int empId);
 	ArrayList<Reimbursements> getReimbsByStatus(String status);
-	ArrayList<Reimbursements> getPendingReim();
+	ArrayList<Reimbursements> getAllPendingReimMan();
 //	ArrayList<Reimbursements> getResolvedReimMan();   MOVED TO EMP DAO
 	ArrayList<Reimbursements> getReimReqSingleEmp(int empId);
 	boolean addReimb(Reimbursements reimb);
