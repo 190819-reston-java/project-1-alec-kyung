@@ -136,7 +136,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			statement.setString(3, eu.getFirstName());
 			statement.setString(4, eu.getLastName());
 			statement.setLong(5, eu.getPhoneNumber());
-			statement.setBoolean(6, eu.isManager());
+			statement.setBoolean(6, eu.getManager());
 
 			statement.execute();
 
@@ -190,34 +190,34 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	}
 
 
-	@Override
-	public Employee isManager(int empId) {
-		Employee user = null;
-
-		PreparedStatement statement = null;
-		ResultSet results = null;
-
-		String query = "SELECT manager\r\n" + 
-				"FROM ers.employees\r\n" + 
-				"WHERE emp_id =?;";
-		
-		try (Connection conn = ERSConnectionUtil.getConnection()){
-			statement = conn.prepareStatement(query);
-			statement.setInt(1, empId);
-			if (statement.execute()) {
-				results = statement.getResultSet();
-				if (results.next()) {
-					user = createEmployeeFromRS(results);
-					}
-				}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			ERSStreamCloser.close(results);
-			ERSStreamCloser.close(statement);
-		}
-		return user;
-	}
+//	@Override
+//	public Employee isManager(int empId) {
+//		Employee user = null;
+//
+//		PreparedStatement statement = null;
+//		ResultSet results = null;
+//
+//		String query = "SELECT manager\r\n" + 
+//				"FROM ers.employees\r\n" + 
+//				"WHERE emp_id =?;";
+//		
+//		try (Connection conn = ERSConnectionUtil.getConnection()){
+//			statement = conn.prepareStatement(query);
+//			statement.setInt(1, empId);
+//			if (statement.execute()) {
+//				results = statement.getResultSet();
+//				if (results.next()) {
+//					user = createEmployeeFromRS(results);
+//					}
+//				}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			ERSStreamCloser.close(results);
+//			ERSStreamCloser.close(statement);
+//		}
+//		return user;
+//	}
 
 	@Override
 	public Employee getEmployeeID(String email) {
@@ -261,11 +261,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			
 //			String query = "SELECT * FROM ers.reimbursements WHERE resolved_by_id IS NOT NULL;";
 //			
-			String query = "SELECT *\r\n" + 
-			"FROM ers.employees\r\n" + 
-			"FULL JOIN ers.reimbursements\r\n" + 
-			"ON ers.employees.emp_id = ers.reimbursements.resolved_by_id\r\n" + 
-			"WHERE ers.reimbursements.resolved_by_id IS NOT NULL;";
+			String query = "SELECT ers.employees.email, ers.employees.first_name, ers.employees.last_name, ers.reimbursements.amount, ers.reimbursements.status, ers.reimbursements.image_url\r\n" + 
+					"FROM ers.employees\r\n" + 
+					"FULL JOIN ers.reimbursements\r\n" + 
+					"ON ers.employees.emp_id = ers.reimbursements.submitted_by_id\r\n" + 
+					"WHERE ers.reimbursements.status = 'approved' OR ers.reimbursements.status = 'denied';";
 
 			List<Employee> employeesList = new ArrayList<Employee>();
 
@@ -274,15 +274,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				results = statement.executeQuery();
 
 				while (results.next()) {
+					Reimbursements reimbInfo = new Reimbursements();
 					Employee empInfo = new Employee();
 					
-					empInfo.setEmpId(results.getInt("emp_id"));
-//					empInfo.setEmail(results.getString("email"));
-//					empInfo.setEmpPwd(results.getString("pwd"));
+					empInfo.setEmail(results.getString("email"));
 					empInfo.setFirstName(results.getString("first_name"));
 					empInfo.setLastName(results.getString("last_name"));
-//					empInfo.setPhoneNumber(results.getLong("phone_number"));
-//					empInfo.setManager(results.getBoolean("manager"));
+					reimbInfo.setReimbAmt(results.getDouble("amount"));
+					reimbInfo.setReimbStatus(results.getString("status"));
+					reimbInfo.setImageUrl(results.getString("image_url"));
 					
 					employeesList.add(empInfo);
 
@@ -297,12 +297,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 			}
 			return employeesList;
-		}
-
-		@Override
-		public Employee isManager() {
-			// TODO Auto-generated method stub
-			return null;
 		}
 
 }

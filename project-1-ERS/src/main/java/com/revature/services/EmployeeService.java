@@ -22,9 +22,9 @@ public class EmployeeService {
 		return employeeDao.getEmployeeInfo(email);
 	}
 	
-	public boolean getManager() {
-		return employeeDao.isManager() != null;
-	}
+//	public boolean getManager() {
+//		return employeeDao.getManager();
+//	}
 	
 	public List<Employee> getResolvedReimMan() {
 	return  employeeDao.getResolvedReimMan();
