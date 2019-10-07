@@ -16,14 +16,14 @@ manager boolean DEFAULT FALSE NOT NULL
 SELECT * FROM ers.employees;
 
 INSERT INTO ers.employees VALUES
-	(DEFAULT, 'revature@gmail.com', 'revature', 'John', 'Smith', 7031234567, TRUE),
-	(DEFAULT, 'work@gmail.com', 'iwantmoney', 'Kyung', 'Lee', 7032223333, DEFAULT);
+	(DEFAULT, 'manager@gmail.com', 'manager', 'Kyung', 'Alec', 7031112222, TRUE),
+	(DEFAULT, 'worker@gmail.com', 'worker', 'John', 'Smtih', 7033587865, DEFAULT);
 
 DROP TABLE ers.reimbursements;
 CREATE TABLE ers.reimbursements(
 reimb_id SERIAL NOT NULL,
 amount NUMERIC (10, 2) NOT NULL,
-status VARCHAR (30) NOT NULL,
+status VARCHAR (30) DEFAULT 'pending' NOT NULL,
 submitted_by_id INTEGER REFERENCES ers.employees(emp_id) NOT NULL,
 resolved_by_id INTEGER REFERENCES ers.employees(emp_id),
 image_url VARCHAR (100),
@@ -35,8 +35,8 @@ SELECT * FROM ers.reimbursements;
 INSERT INTO ers.reimbursements VALUES
 	(DEFAULT, 123.45, 'approved', 2, 1, NULL, DEFAULT),
 	(DEFAULT, 75.21, 'denied', 2, 1, NULL, DEFAULT),
-	(DEFAULT, 50.50, 'submitted', 2, NULL, NULL, DEFAULT),
-	(DEFAULT, 2.33, 'submitted', 2, NULL, NULL, DEFAULT);
+	(DEFAULT, 50.50, 'pending', 2, NULL, NULL, DEFAULT),
+	(DEFAULT, 2.33, 'pending', 2, NULL, NULL, DEFAULT);
 
 --This shows resolved reimbursements
 SELECT * 

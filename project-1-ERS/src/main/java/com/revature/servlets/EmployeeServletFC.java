@@ -86,10 +86,12 @@ public class EmployeeServletFC extends HttpServlet {
 
 		resp.setContentType("text/html;charset=UTF-8");
 
+
 		// NEED TO WORK ON REDIRECTING BACK TO MAIN PAGE
 //		resp.sendRedirect("viewInfo");
 
 	}
+
 
 	private void updateEmployee(HttpServletRequest req, HttpServletResponse resp, String[] tokens) throws IOException {
 		ObjectMapper om = new ObjectMapper();
