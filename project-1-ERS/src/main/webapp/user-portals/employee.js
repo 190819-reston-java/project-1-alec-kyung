@@ -5,6 +5,10 @@ const SUBMIT_URL = "/project-1-ERS/employee/submitReimb";
 const PENDING_URL = "/project-1-ERS/employee/pendingReimbs";
 const RESOLVED_URL = "/project-1-ERS/employee/resolvedReimbs";
 
+let unorderedList = document.getElementsByTagName("ul");
+unorderedList.className = "list-group-item";
+
+
 //GET EMPLOYEE INFO
 let employeeInfoLi = document.getElementById("employeeInfo");
 let infoCard = document.getElementById("employeeInfoCard");
@@ -41,8 +45,9 @@ let updateButton = document.getElementById("get-employee-info");
 // let submitForm = document.getElementById("submit-reimb");
 
 // submitForm.addEventListener("submit", (event) => {
-
+//     // event.preventDefault();
 // })
+
 
 //VIEW PENDING REIMBURSEMENTS BY EMPLOYEE ID
 
@@ -73,8 +78,8 @@ pendingButton.addEventListener("click", (event) => {
 
 let createPRLi = (ePendingReimbs) => {
     let PRLi = document.createElement("li");
+    // PRLi.className = "list-group-item";
     PRLi.innerText = `REIMBURSEMENT ID: ${ePendingReimbs.reimbId} | AMOUNT: ${ePendingReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${ePendingReimbs.reimbStatus}`;
-
     viewPRLi.append(PRLi);
 };
 
@@ -135,4 +140,18 @@ let updateFromForm = (form) => {
     employee.email = form.email.value;
     employee.password = form.password.value;
     return employee;
-}
+};
+    
+const LOGOUT_URL = "/project-1-ERS/employee/logout";
+
+let logout = document.getElementById("logout");
+logout.addEventListener("click", (event)=>{
+    console.log("logout clicked")
+    fetch(LOGOUT_URL, { method: "GET" })
+        .then((response) => {
+            return response.json();
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+});

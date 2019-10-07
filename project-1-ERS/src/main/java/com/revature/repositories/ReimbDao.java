@@ -13,7 +13,7 @@ public interface ReimbDao {
 //	ArrayList<Reimbursements> getResolvedReimMan();   MOVED TO EMP DAO
 	ArrayList<Reimbursements> getReimReqSingleEmp(int empId);
 	boolean addReimb(Reimbursements reimb);
-	boolean resolve(Reimbursements reimb);
+	boolean resolve(String reimbStatus, int resolvedBy, int reimbId);
 	
 	
 	ArrayList<Reimbursements> getResolvedReimEmp(int empId);
@@ -32,6 +32,9 @@ public interface ReimbDao {
 	ArrayList<Reimbursements> getResolvedReimbursementsAsEmployee(int empId);
 	ArrayList<Reimbursements> getPendingReimbursementsAsEmployee(int empId);
 	
+	//Approve/Deny
+	public boolean requestApproved(int id);
+	public boolean requestDenied(int id);
 	
 	
 }

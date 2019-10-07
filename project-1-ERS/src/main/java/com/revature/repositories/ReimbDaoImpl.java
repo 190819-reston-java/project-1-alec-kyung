@@ -262,16 +262,18 @@ public class ReimbDaoImpl implements ReimbDao {
 
 	// double checckkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 	@Override
-	public boolean resolve(Reimbursements reimb) {
+	public boolean resolve(String reimbStatus, int resolvedBy, int reimbId) {
 		PreparedStatement statement = null;
 
-		String query = "UPDATE ers.reimbursements\r\n" + "SET status =?\r\n" + "WHERE reimb_id = ?;";
+		String query = "UPDATE ers.reimbursements SET status = ?, resolved_by_id = ? WHERE reimb_id = ?;";
 
 		try (Connection conn = ERSConnectionUtil.getConnection()) {
 
 			statement = conn.prepareStatement(query);
-			statement.setInt(1, reimb.getReimbId());
-			statement.setString(2, reimb.getReimbStatus());
+			statement.setString(1, reimbStatus);
+			statement.setInt(2, resolvedBy);
+			statement.setInt(3, reimbId);
+			
 
 			statement.execute();
 		} catch (SQLException e) {
@@ -486,5 +488,49 @@ public class ReimbDaoImpl implements ReimbDao {
 		}
 		return reimbursementsList;
 	}
+	
+	//APPROVE DENY____________
+
+	@Override
+	public boolean requestApproved(int id) {
+		PreparedStatement statement = null;
+
+		final String query = "UPDATE ers.reimbursements SET status='Resolved', resolved_status='Approved', resolved_by=? WHERE id = ?;";
+
+		try (Connection conn = ERSConnectionUtil.getConnection();){
+			statement = conn.prepareStatement(query);
+			statement.setInt(1, id);
+			statement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			ERSStreamCloser.close(statement);
+		}
+
+		return true;
+	}
+
+
+	@Override
+	public boolean requestDenied(int id) {
+		PreparedStatement statement = null;
+
+		final String query = "UPDATE ers.reimbursements SET status='Resolved', resolved_status='Approved', resolved_by=? WHERE id = ?;";
+
+		try (Connection conn = ERSConnectionUtil.getConnection();){
+			statement = conn.prepareStatement(query);
+			statement.setInt(1, id);
+			statement.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			ERSStreamCloser.close(statement);
+		}
+
+		return true;
+	}
+
 
 }

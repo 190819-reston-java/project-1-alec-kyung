@@ -27,6 +27,7 @@ getEmployeesButton.addEventListener("click", (event) => {
 });
 
 
+
 let clearDisplay = () => {
     employeesList.innerHTML = "";
 };
@@ -34,7 +35,7 @@ let clearDisplay = () => {
 let createLi = (employee) => {
     let employeeLi = document.createElement("li");
     let linebreak = document.createElement("br");
-    employeeLi.innerText = `EMPLOYEE ID: ${employee.empId} | EMPLOYEE NAME: ${employee.firstName} ${employee.lastName} | EMAIL: ${employee.email} | PHONE: ${employee.phoneNumber}`;
+    employeeLi.innerText = `EMPLOYEE ID: ${employee.empId} | EMPLOYEE NAME: ${employee.firstName} ${employee.lastName} | EMAIL: ${employee.email} | PHONE: ${employee.phoneNumber} | MANAGER: ${employee.manager}`;
 
     employeesList.append(employeeLi);
 };
@@ -43,7 +44,7 @@ let createLi = (employee) => {
 const SEARCH_REIMB_URL = "/project-1-ERS/manager/select-reimb";
 let selectEmpReimbButton = document.getElementById("select-request");
 let searchResults = document.getElementById("selectEmployee");
-selectEmpReimbButton.addEventListener("click", (event) => {
+selectEmpReimbButton.addEventListener("submit", (event) => {
     console.log("select reimbursement clicked");
     fetch(SEARCH_REIMB_URL, { method: "GET" })
         .then((response) => {
@@ -130,6 +131,17 @@ managerViewResolvedButton.addEventListener("click", (event) => {
 let createRRLi = (resolvedReimbs) => {
     let RRLi = document.createElement("li");
     RRLi.innerText = `REIMBURSEMENT ID: ${resolvedReimbs.reimbId} | AMOUNT: ${resolvedReimbs.reimbAmt} | REIMBURSEMENT STATUS: ${resolvedReimbs.reimbStatus} | SUBMITTED BY: ${resolvedReimbs.submittedBy} | RESOLVED BY: ${resolvedReimbs.resolvedBy}`;
-    // RRLi.innerText = "TEST TEXT RESOLVED REIMBURSEMENTS";
     viewRRLi.append(RRLi);
 };
+
+let logout = document.getElementById("logout");
+
+logout.addEventListener("click", (event)=>{
+    fetch(LOGOUT_URL, { method: "GET" })
+        .then((response) => {
+            return response.json();
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+});
